@@ -43,4 +43,11 @@ yarn-error.log*
 *.tsbuildinfo
 
 # idea files
+<<<<<<< HEAD
 .idea
+=======
+.idea
+
+# docker
+docker-compose.yml
+>>>>>>> 66819f8 (docker-add)
