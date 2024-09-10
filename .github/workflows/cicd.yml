@@ -30,9 +30,9 @@ jobs:
     - name: Push Docker Image
     - run: docker push HangA-Kim/keyword_finder_public:latest
     
-  deploy:
-    needs: build
-    runs-on: aws-ec2 
+  # deploy:
+  #   needs: build
+  #   runs-on: aws-ec2 
     # steps:
     #   - name: Pull image from docker hub
     #   - run: docker pull HangA-Kim/keyword_finder_public:latest
