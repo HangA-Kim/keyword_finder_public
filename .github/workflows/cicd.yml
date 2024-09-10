@@ -42,17 +42,17 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t HangA-Kim/keyword_finder_public .
+      run: docker build -t hangakim/keyword_finder .
 
     - name: Push Docker Image
-      run: docker push HangA-Kim/keyword_finder_public:latest
+      run: docker push hangakim/keyword_finder:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2 
     steps:
       - name: Pull image from docker hub
-        run: docker pull HangA-Kim/keyword_finder_public:latest
+        run: docker pull hangakim/keyword_finder:latest
 
       - name: Delete existing container
         run: docker rm -f reactContainer
@@ -60,4 +60,4 @@ jobs:
       - name: Run container
         run: docker run -d -p 80:80 --name reactContainer \
           --env-file .env \
-          HangA-Kim/keyword_finder_public
+          hangakim/keyword_finder
