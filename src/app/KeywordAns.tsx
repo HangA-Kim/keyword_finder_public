@@ -53,7 +53,7 @@ const KeywordAns = ({ session }: KeywordAnsProps) => {
     const data = await utils.analysis.reqNaver.fetch(requestData);
 
     if (session)
-      await saveKeyword.mutate({
+      saveKeyword.mutate({
         keyword: requestData.searchText,
       });
 

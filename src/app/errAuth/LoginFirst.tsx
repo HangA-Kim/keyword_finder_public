@@ -1,7 +1,7 @@
-import { Typography, Stack, Button, Box } from "@mui/material";
+import { Typography, Stack, Box } from "@mui/material";
 import React from "react";
 import styles from "~/app/index.module.css";
-import LogoutState, { buttonStyles } from "./../_components/auth/LogoutState";
+import LogoutState from "./../_components/auth/LogoutState";
 
 interface LoginFirstProps {
   email: string;

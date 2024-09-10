@@ -1,26 +1,8 @@
 "use client";
 
 import * as React from "react";
-import {
-  Tabs,
-  Box,
-  Tab,
-  IconButton,
-  Typography,
-  Menu,
-  Container,
-  Avatar,
-  Button,
-  Divider,
-  Stack,
-  AppBar,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
-import PersonIcon from "@mui/icons-material/Person";
+import { Tabs, Tab, Typography, Stack, AppBar } from "@mui/material";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-import Cookies from "js-cookie";
 import { Session } from "next-auth";
 import RecommendIcon from "@mui/icons-material/Recommend";
 import BarChartIcon from "@mui/icons-material/BarChart";

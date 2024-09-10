@@ -1,19 +1,19 @@
 "use client";
 
 import { Chip, Stack } from "@mui/material";
-import React, { useState } from "react";
-import { api } from "~/trpc/react";
+import React from "react";
 
 interface SearchChipsProps {
   keywordList: { word: string }[];
-  deleteKeyword(keyword: string): void;
-  clickKeyword(keyword: string): void;
+  deleteKeyword(this: void, keyword: string): Promise<void>;
+  clickKeyword(this: void, keyword: string): void;
 }
-const SearchChips = ({
+
+const SearchChips: React.FunctionComponent<SearchChipsProps> = ({
   keywordList = [],
   deleteKeyword,
   clickKeyword,
-}: SearchChipsProps) => {
+}) => {
   // console.log("SearchChips:", keywordList);
 
   return (

@@ -1,4 +1,4 @@
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import styles from "~/app/index.module.css";
 import LogoutState from "../_components/auth/LogoutState";

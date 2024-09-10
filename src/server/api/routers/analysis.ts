@@ -39,7 +39,7 @@ export const analysisRouter = createTRPCRouter({
         return {
           result: `ERR ${res.status} : ${res.statusText}`,
         };
-      const resData: NaverResponse = await res.json();
+      const resData = (await res.json()) as NaverResponse;
       console.log(resData.results[0]?.data);
       if (resData.results[0]) {
         return {

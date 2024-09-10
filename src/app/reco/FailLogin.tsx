@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Stack,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Stack } from "@mui/material";
 import React from "react";
 import styles from "~/app/index.module.css";
 

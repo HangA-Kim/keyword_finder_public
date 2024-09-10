@@ -5,10 +5,10 @@ import SignUpFirst from "./SignUpFirst";
 export default async function ErrAuth({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Record<string, string | undefined>;
 }) {
-  const intent = searchParams["intent"];
-  const email = searchParams["email"] || "";
+  const intent = searchParams.intent;
+  const email = searchParams.email ?? "";
   console.log("intent:", intent);
   return (
     <>
