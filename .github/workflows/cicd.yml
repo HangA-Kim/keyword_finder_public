@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
     - name: Checkout Source Code
@@ -24,9 +24,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build the application
-      run: npm run build
-
     - name: Create .env file
       run: |
         touch .env
@@ -37,6 +34,9 @@ jobs:
         echo "NAVER_SECRET=${{ secrets.NAVER_SECRET }}" >> .env
         echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
         echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
+        
+    - name: Build the application
+      run: npm run build
 
     - name: Sign in to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
