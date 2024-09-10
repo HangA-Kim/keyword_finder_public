@@ -33,15 +33,15 @@ jobs:
   deploy:
     needs: build
     runs-on: aws-ec2 
-    steps:
-      - name: Pull image from docker hub
-      - run: docker pull HangA-Kim/keyword_finder_public:latest
+    # steps:
+    #   - name: Pull image from docker hub
+    #   - run: docker pull HangA-Kim/keyword_finder_public:latest
         
-      - name: Delete existing container
-      - run: docker rm -f reactContainer
+    #   - name: Delete existing container
+    #   - run: docker rm -f reactContainer
         
-      - name: Run container
-      - run: docker run -d -p 80:80 --name reactContainer HangA-Kim/keyword_finder_public
+    #   - name: Run container
+    #   - run: docker run -d -p 80:80 --name reactContainer HangA-Kim/keyword_finder_public
 
 
 
