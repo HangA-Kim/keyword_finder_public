@@ -8,13 +8,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
     - name: Checkout Source Code
       uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # 사용 중인 Node.js 버전에 맞게 설정
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the application
+      run: npm run build
 
     - name: Create .env file
       run: |
@@ -27,36 +34,26 @@ jobs:
         echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
         echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build the application
-      run: npm run build
-    
     - name: Sign in to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-    
+
     - name: Build Docker Image
       run: docker build -t HangA-Kim/keyword_finder_public .
-      
+
     - name: Push Docker Image
       run: docker push HangA-Kim/keyword_finder_public:latest
-    
+
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-
+    runs-on: aws-ec2 
     steps:
-    - name: Pull image from docker hub
-      run: docker pull HangA-Kim/keyword_finder_public:latest
-        
-    - name: Delete existing container
-      run: docker rm -f reactContainer || true  # if no container exists, don't fail
-        
-    - name: Run container
-      run: docker run -d -p 80:80 --name reactContainer HangA-Kim/keyword_finder_public
+      - name: Pull image from docker hub
+        run: docker pull HangA-Kim/keyword_finder_public:latest
+
+      - name: Delete existing container
+        run: docker rm -f reactContainer
+
+      - name: Run container
+        run: docker run -d -p 80:80 --name reactContainer \
+          --env-file .env \
+          HangA-Kim/keyword_finder_public
