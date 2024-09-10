@@ -59,6 +59,4 @@ jobs:
         run: docker rm -f reactContainer
 
       - name: Run container
-        run: docker run -d -p 80:80 --name reactContainer \
-          --env-file .env \
-          hangakim/keyword_finder
+        run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
