@@ -43,8 +43,8 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 80
 # ENV PORT 3000
-
-CMD ["server.js"]
+ENV HOSTNAME="0.0.0.0"
+CMD ["node", "server.js"]
 
 ## 0911 ADD
 # # nginx 이미지
