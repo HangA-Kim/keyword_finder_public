@@ -54,7 +54,7 @@ jobs:
         #   --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
         #   --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
         #   -t hangakim/keyword_finder .
-        run: docker build -t hangakim/keyword_finder .
+        run: docker build --no-cache --progress=plain -t hangakim/keyword_finder .
 
       - name: Push Docker Image
         run: docker push hangakim/keyword_finder:latest
