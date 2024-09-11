@@ -18,6 +18,16 @@ RUN npm install
 # SKIP_ENV_VALIDATION=1 >> ENV 파일안쓰려고.
 FROM --platform=linux/amd64 node:20-alpine AS builder
 WORKDIR /app
+
+# Build arguments (from .env or Docker Compose)
+ARG DATABASE_URL
+ARG GOOGLE_CLIENT_ID
+ARG GOOGLE_CLIENT_SECRET
+ARG NAVER_ID
+ARG NAVER_SECRET
+ARG NEXTAUTH_URL
+ARG NEXTAUTH_SECRET
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Build the application using npm
@@ -25,7 +35,16 @@ COPY . .
 #     if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm ci; \
 #     else echo "package-lock.json not found." && exit 1; \
 #     fi
-RUN npm run build
+# 환경 변수를 빌드에 반영하여 npm run build 실행
+RUN \
+    DATABASE_URL=$DATABASE_URL \
+    GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID \
+    GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET \
+    NAVER_ID=$NAVER_ID \
+    NAVER_SECRET=$NAVER_SECRET \
+    NEXTAUTH_URL=$NEXTAUTH_URL \
+    NEXTAUTH_SECRET=$NEXTAUTH_SECRET \
+    npm run build
 ##### RUNNER
 # runner : 사용자와 그룹을 정의하고 사용자를 모든 파일의 소유자로 설정한다. 루트사용자로 이미지를 실행하는 것을 방지
 FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
