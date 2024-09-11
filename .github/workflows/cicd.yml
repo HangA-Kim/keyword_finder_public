@@ -23,6 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install --only=production
+
+      - name: delete nodeModules
         run: npm prune --production
 
       - name: Create .env file
