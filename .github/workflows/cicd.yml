@@ -21,8 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # - name: Install dependencies
-      #   run: npm install
+      - name: Install dependencies
+        run: npm install --only=production
+        run: npm prune --production
 
       - name: Create .env file
         run: |
