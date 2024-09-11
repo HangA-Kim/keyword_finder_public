@@ -54,17 +54,16 @@ WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
 RUN rm -rf *
 # nginx 디렉토리에 리엑트 빌드 파일 복사
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=build /app/next.config.js ./
+COPY --from=build /app/public ./public
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
 # COPY --from=build /app .
 # nginx 포트 설정
 # EXPOSE 80
 # nginx 실행 할 때 데몬 실행 기능 끔
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
-EXPOSE 3000
-ENV PORT 3000
+EXPOSE 80
 
 CMD ["server.js"]
