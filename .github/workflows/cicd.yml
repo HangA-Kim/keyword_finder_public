@@ -61,8 +61,8 @@ jobs:
 
   deploy:
     needs: build
-    # runs-on: self-hosted
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    # runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v3
