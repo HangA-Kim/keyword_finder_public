@@ -38,7 +38,7 @@ jobs:
       # - name: delete nodeModules
       #   run: npm prune --production
       - name: Build the application
-        run: npm run build
+        run: next build
 
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}

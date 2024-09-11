@@ -31,7 +31,7 @@ RUN npx next telemetry disable
 FROM --platform=linux/amd64 node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV production
-RUN npm run build
+RUN next build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
