@@ -24,47 +24,47 @@ FROM --platform=linux/amd64 node:20-alpine AS builder
 # ARG NEXTAUTH_URL
 # ARG NEXTAUTH_SECRET
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# COPY --from=deps /app/node_modules ./node_modules
+RUN npm Install
 COPY . .
 # Build the application using npm
-RUN \
-    if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm ci; \
-    else echo "package-lock.json not found." && exit 1; \
-    fi
+# RUN \
+#     if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm ci; \
+#     else echo "package-lock.json not found." && exit 1; \
+    # fi
+
+RUN npm run build
+
 ##### RUNNER
 # runner : 사용자와 그룹을 정의하고 사용자를 모든 파일의 소유자로 설정한다. 루트사용자로 이미지를 실행하는 것을 방지
-FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
-WORKDIR /app
-ENV NODE_ENV production
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-EXPOSE 80
-ENV PORT 3000
-# ENV HOSTNAME="0.0.0.0"
-CMD ["/app/.next/standalone/server.js"]
-
-## 0911 ADD
-# # nginx 이미지
-# FROM nginx:1.23-alpine AS runner
-# # nginx 디폴트 접근 파일 설정
-# WORKDIR /usr/share/nginx/html
-# # 기존 도커 컨테이너 삭제
-# RUN rm -rf *
-# # nginx 디렉토리에 리엑트 빌드 파일 복사
+# FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
+# WORKDIR /app
+# ENV NODE_ENV production
 # COPY --from=builder /app/next.config.js ./
 # COPY --from=builder /app/public ./public
 # COPY --from=builder /app/package.json ./package.json
 # COPY --from=builder /app/.next/standalone ./
 # COPY --from=builder /app/.next/static ./.next/static
-# # COPY --from=build /app/build .
-# # nginx 포트 설정
-# # EXPOSE 80
-# # nginx 실행 할 때 데몬 실행 기능 끔
-# # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # EXPOSE 80
-# # ENV PORT 3000
+# ENV PORT 3000
+# # ENV HOSTNAME="0.0.0.0"
+# CMD ["/app/.next/standalone/server.js"]
 
-# CMD ["server.js"]
+## 0911 ADD
+# # nginx 이미지
+FROM nginx:1.23-alpine AS runner
+# nginx 디폴트 접근 파일 설정
+WORKDIR /usr/share/nginx/html
+# 기존 도커 컨테이너 삭제
+RUN rm -rf *
+# nginx 디렉토리에 리엑트 빌드 파일 복사
+COPY --from=build /app .
+# COPY --from=build /app/build .
+# nginx 포트 설정
+# EXPOSE 80
+# nginx 실행 할 때 데몬 실행 기능 끔
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+# ENV PORT 3000
+
+CMD ["server.js"]
