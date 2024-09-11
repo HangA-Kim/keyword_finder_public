@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        run: npm install --only=production
+      # - name: Install dependencies
+      #   run: npm install --only=production
 
       # - name: delete nodeModules
       #   run: npm prune --production
@@ -38,8 +38,8 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-      - name: Build the application
-        run: npm run build
+      # - name: Build the application
+      #   run: npm run build
 
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
