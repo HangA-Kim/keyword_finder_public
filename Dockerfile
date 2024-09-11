@@ -3,6 +3,7 @@
 FROM --platform=linux/amd64 node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
+COPY prisma ./
 COPY package.json package-lock.json* ./
 # Use npm ci if package-lock.json exists, otherwise use npm install
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
