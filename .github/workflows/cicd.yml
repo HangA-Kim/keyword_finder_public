@@ -72,5 +72,5 @@ jobs:
         run: docker rm -f kfContainer
 
       - name: Run container
-        # run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
-        run: docker run -d -p 3000 --name kfContainer --env-file .env hangakim/keyword_finder:latest
+        run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
+        # run: docker run -d -p 3000 --name kfContainer --env-file .env hangakim/keyword_finder:latest
