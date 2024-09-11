@@ -4,6 +4,10 @@ FROM --platform=linux/amd64 node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY package.json package-lock.json* ./
+RUN \
+    if [ -f package-lock.json ]; then npm ci; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 RUN npm install
 
 ##### BUILDER
@@ -12,6 +16,10 @@ FROM --platform=linux/amd64 node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN \
+    if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm ci; \
+    else echo "package-lock.json not found." && exit 1; \
+    fi
 # 프로덕션 빌드에 필요한 작업을 수행하지 않음
 
 ##### RUNNER
