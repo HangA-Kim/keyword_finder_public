@@ -4,14 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # args:
-      #   - DATABASE_URL=${DATABASE_URL}
-      #   - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      #   - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      #   - NAVER_ID=${NAVER_ID}
-      #   - NAVER_SECRET=${NAVER_SECRET}
-      #   - NEXTAUTH_URL=${NEXTAUTH_URL}
-      #   - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - NAVER_ID=${NAVER_ID}
+        - NAVER_SECRET=${NAVER_SECRET}
+        - NEXTAUTH_URL=${NEXTAUTH_URL}
+        - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
     ports:
       - "3000:80"
     env_file:

@@ -11,6 +11,13 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 ##### BUILDER
 # builder : deps 에서 Node 모듈 폴더를 복사하고 모든 프로젝트 폴더와 파일을 복사한 후 프로덕션을 위한 애플리케이션을 빌드한다.
 FROM --platform=linux/amd64 node:20-alpine AS builder
+ARG DATABASE_URL
+ARG GOOGLE_CLIENT_ID
+ARG GOOGLE_CLIENT_SECRET
+ARG NAVER_ID
+ARG NAVER_SECRET
+ARG NEXTAUTH_URL
+ARG NEXTAUTH_SECRET
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
