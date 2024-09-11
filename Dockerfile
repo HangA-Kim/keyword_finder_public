@@ -28,7 +28,7 @@ COPY . .
 RUN npx next telemetry disable
 # RUN npm run build
 RUN \
-    if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm ci; \
+    if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm run build; \
     else echo "package-lock.json not found." && exit 1; \
     fi
 
