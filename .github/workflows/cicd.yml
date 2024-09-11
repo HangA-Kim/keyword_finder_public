@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -82,7 +82,6 @@ jobs:
 
       # - name: Delete existing container
       #   run: docker rm -f kfContainer || true
-
       # - name: Run container
       # run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
       # run: docker run -d -p 3000:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest

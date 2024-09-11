@@ -30,6 +30,7 @@ RUN npx next telemetry disable
 FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
 WORKDIR /app
 ENV NODE_ENV production
+RUN npm run build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
