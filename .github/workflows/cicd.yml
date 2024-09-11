@@ -81,7 +81,7 @@ jobs:
         run: docker pull hangakim/keyword_finder:latest
 
       - name: Delete existing container
-        run: docker rm -f kfContainer
+        run: docker rm -f kfContainer || true
 
       # - name: Run container
       # run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
