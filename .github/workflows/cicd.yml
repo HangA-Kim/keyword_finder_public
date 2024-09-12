@@ -81,7 +81,7 @@ jobs:
       - name: Create pwd.txt file
         run: |
           touch pwd
-          echo "${{ secrets.DOCKER_PASSWORD }}" >> pwd
+          echo "${{ secrets.DOCKER_PASSWORD }}" > pwd
 
       - name: Sign in to Docker Hub
         run: docker login --username foo --password-stdin < ~/pwd
