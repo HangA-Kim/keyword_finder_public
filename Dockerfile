@@ -52,6 +52,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+RUN chmod -R 755 /usr/share/nginx/html
+
 EXPOSE 80
 # nginx 실행 할 때 데몬 실행 기능 끔
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
