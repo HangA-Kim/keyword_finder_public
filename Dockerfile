@@ -44,8 +44,8 @@ WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
 RUN rm -rf *
 
-# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 # RUN next build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
