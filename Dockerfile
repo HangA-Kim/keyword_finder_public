@@ -43,6 +43,8 @@ FROM nginx:1.23-alpine AS runner
 WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
 RUN rm -rf *
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 # RUN next build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public

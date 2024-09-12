@@ -32,14 +32,6 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-      # - name: Install dependencies
-      #   run: npm install
-
-      # - name: delete nodeModules
-      #   run: npm prune --production
-      # - name: Build the application
-      #   run: npm ci
-
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
@@ -78,17 +70,8 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-      # - name: Create pwd file
-      #   run: |
-      #     touch pwd
-      #     echo "${{ secrets.DOCKER_PASSWORD }}" > pwd
-
-      # - name: Sign in to Docker Hub
-      #   run: docker login --username foo --password-stdin < ./pwd
-      #   # run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Pull image from docker hub
-        run: docker pull hangakim/keyword_finder:latest
+        run: docker-compose pull
 
       # - name: Delete existing container
       #   run: docker rm -f kfContainer || true
