@@ -14,6 +14,15 @@ services:
     #     - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
     image: hangakim/keyword_finder:latest
     ports:
-      - "80:80" # 컨테이너의 80 포트를 호스트의 80 포트로 매핑
+      - "3000:3000" # 컨테이너의 80 포트를 호스트의 80 포트로 매핑
     env_file:
       - .env
+    command: npm start # 컨테이너가 시작될 때 실행할 명령어를 지정
+nginx:
+  build:
+    context: .
+    target: runner
+  ports:
+    - "80:80"
+  depends_on:
+    - app
