@@ -78,13 +78,13 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-      - name: Create pwd.txt file
+      - name: Create pwd file
         run: |
           touch pwd
           echo "${{ secrets.DOCKER_PASSWORD }}" > pwd
 
       - name: Sign in to Docker Hub
-        run: docker login --username foo --password-stdin < ~/pwd
+        run: docker login --username foo --password-stdin < ./pwd
         # run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Pull image from docker hub
