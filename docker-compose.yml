@@ -18,3 +18,11 @@ services:
     env_file:
       - .env
     command: npm start # 컨테이너가 시작될 때 실행할 명령어를 지정
+
+  nginx:
+    build:
+      context: .
+    ports:
+      - "80:80"
+    depends_on:
+      - app
