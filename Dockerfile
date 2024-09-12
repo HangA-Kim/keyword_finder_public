@@ -44,14 +44,15 @@ WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
 RUN rm -rf *
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 # RUN next build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-EXPOSE 3000
+EXPOSE 80
 # nginx 실행 할 때 데몬 실행 기능 끔
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # ENV PORT 3000
