@@ -63,3 +63,4 @@ ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # ENV PORT 3000
 
 # CMD ["server.js"]
+CMD ["npm", "start"]
