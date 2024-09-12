@@ -39,12 +39,14 @@ RUN \
 # ENV NODE_ENV production
 
 FROM nginx:1.23-alpine AS runner
+
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
 # nginx 디폴트 접근 파일 설정
 WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
-RUN rm -rf *
+# RUN rm -rf *
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 # RUN next build
 COPY --from=builder /app/next.config.js ./
