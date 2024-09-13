@@ -2,6 +2,10 @@ FROM nginx:1.23-alpine AS runner
 
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
+WORKDIR /usr/share/nginx/html
+# 기존 도커 컨테이너 삭제
+RUN rm -rf *
+
 # COPY ./default.conf /etc/nginx/conf.d/
 # COPY ./nginx.conf /etc/nginx/
 # COPY ./mime.types /etc/nginx/

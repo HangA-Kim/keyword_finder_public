@@ -34,7 +34,8 @@ RUN \
 
 ##### RUNNER
 # runner : 사용자와 그룹을 정의하고 사용자를 모든 파일의 소유자로 설정한다. 루트사용자로 이미지를 실행하는 것을 방지
-FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
+# FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
+FROM --platform=linux/amd64 node:20-alpine AS runner
 WORKDIR /app
 # ENV NODE_ENV production
 
