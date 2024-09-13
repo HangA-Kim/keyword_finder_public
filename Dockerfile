@@ -61,5 +61,5 @@ COPY --from=builder /app/.next/static ./.next/static
 # ENV PORT 3000
 
 EXPOSE 3000
-# CMD ["server.js"]
-CMD ["npm", "run", "start"]
+CMD ["server.js"]
+# CMD ["npm", "run", "start"]
