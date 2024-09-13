@@ -21,10 +21,10 @@ services:
 
   nginx:
     # image: hangakim/keyword_finder:latest
-    build: ./nginx
-    # build:
-    #   context: .
-    #   dockerfile: ./nginx/Dockerfile
+    # build: ./nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
     depends_on:
       - app
     ports:
