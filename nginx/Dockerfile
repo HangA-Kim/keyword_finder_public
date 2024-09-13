@@ -1,18 +1,10 @@
 FROM nginx:1.23-alpine AS runner
 
 # Remove any existing config files
-RUN rm /etc/nginx/conf.d/* 
+RUN rm /etc/nginx/conf.d/*
 
-# Copy config files
-# *.conf files in "conf.d/" dir get included in main config
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/
-# COPY ./default.conf /etc/nginx/conf.d/
-COPY ./nginx.conf /etc/nginx/
+# Copy the custom Nginx configuration file
+COPY ./nginx/kf_nginx.conf /etc/nginx/nginx.conf
 COPY ./mime.types /etc/nginx/
-# COPY ./convert-nginx.sh /etc/nginx/
-
-# giving execution permissions to convert-nginx.sh shell file. 
-# RUN chmod +x /etc/nginx/convert-nginx.sh
-
 
 EXPOSE 80
