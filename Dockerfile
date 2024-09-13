@@ -45,7 +45,7 @@ WORKDIR /app
 # nginx 디폴트 접근 파일 설정
 # WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
-# RUN rm -rf *
+RUN rm -rf *
 
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
