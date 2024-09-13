@@ -1,16 +1,18 @@
 FROM nginx:1.23-alpine AS runner
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# Remove any existing config files
+RUN rm /etc/nginx/conf.d/* 
 
-WORKDIR /usr/share/nginx/html
-# 기존 도커 컨테이너 삭제
-RUN rm -rf *
-
+# Copy config files
+# *.conf files in "conf.d/" dir get included in main config
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/
 # COPY ./default.conf /etc/nginx/conf.d/
-# COPY ./nginx.conf /etc/nginx/
-# COPY ./mime.types /etc/nginx/
+COPY ./nginx.conf /etc/nginx/
+COPY ./mime.types /etc/nginx/
 # COPY ./convert-nginx.sh /etc/nginx/
 
+# giving execution permissions to convert-nginx.sh shell file. 
 # RUN chmod +x /etc/nginx/convert-nginx.sh
+
 
 EXPOSE 80
