@@ -3,10 +3,12 @@ FROM nginx:1.23-alpine
 # Remove any existing config files
 RUN rm /etc/nginx/conf.d/default.conf
 
+RUN ls -l ./nginx/kf_nginx.conf
 # Copy the custom Nginx configuration file
 COPY ./nginx/kf_nginx.conf /etc/nginx/nginx.conf
 
 RUN ls -l /etc/nginx/nginx.conf
+
 
 
 # WORKDIR /usr/share/nginx/html
