@@ -4,7 +4,7 @@ FROM nginx:1.23-alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # RUN ls -l kf_nginx.conf
-RUN ls -l ./nginx/kf_nginx.conf
+# RUN ls -l ./nginx/kf_nginx.conf
 RUN ls -ld ./nginx
 # Copy the custom Nginx configuration file
 COPY kf_nginx.conf /etc/nginx/nginx.conf
