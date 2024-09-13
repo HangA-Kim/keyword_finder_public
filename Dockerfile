@@ -26,27 +26,14 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Build the application using npm
 RUN npx next telemetry disable
-# RUN npm run build
 RUN \
     if [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm run build; \
     else echo "package-lock.json not found." && exit 1; \
     fi
 
 ##### RUNNER
-# runner : 사용자와 그룹을 정의하고 사용자를 모든 파일의 소유자로 설정한다. 루트사용자로 이미지를 실행하는 것을 방지
-# FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
 FROM --platform=linux/amd64 node:20-alpine AS server
 WORKDIR /app
-# ENV NODE_ENV production
-
-# FROM nginx:1.23-alpine AS runner
-
-# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-# nginx 디폴트 접근 파일 설정
-# WORKDIR /usr/share/nginx/html
-# 기존 도커 컨테이너 삭제
-# RUN rm -rf *
 
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
@@ -54,18 +41,9 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# RUN chmod -R 755 /usr/share/nginx/html
-
-# EXPOSE 80
-# nginx 실행 할 때 데몬 실행 기능 끔
-# ENTRYPOINT ["nginx", "-g", "daemon off;"]
-# ENV PORT 3000
 ENV NODE_ENV production
 EXPOSE 3000
 ENV PORT=3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
-# CMD ["npm", "run", "start"]
+
