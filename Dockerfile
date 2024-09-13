@@ -34,21 +34,19 @@ RUN \
 
 ##### RUNNER
 # runner : 사용자와 그룹을 정의하고 사용자를 모든 파일의 소유자로 설정한다. 루트사용자로 이미지를 실행하는 것을 방지
-# FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
+FROM --platform=linux/amd64 gcr.io/distroless/nodejs20-debian12 AS runner
 # WORKDIR /app
 # ENV NODE_ENV production
 
-FROM nginx:1.23-alpine AS runner
+# FROM nginx:1.23-alpine AS runner
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # nginx 디폴트 접근 파일 설정
 WORKDIR /usr/share/nginx/html
 # 기존 도커 컨테이너 삭제
 # RUN rm -rf *
 
-# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-# RUN next build
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
@@ -57,10 +55,9 @@ COPY --from=builder /app/.next/static ./.next/static
 
 RUN chmod -R 755 /usr/share/nginx/html
 
-EXPOSE 80
+# EXPOSE 80
 # nginx 실행 할 때 데몬 실행 기능 끔
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # ENV PORT 3000
 
-# CMD ["server.js"]
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
