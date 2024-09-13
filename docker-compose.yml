@@ -21,8 +21,8 @@ services:
 
   nginx:
     build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
+      context: ./nginx
+      dockerfile: ./Dockerfile
     depends_on:
       - app
     ports:
