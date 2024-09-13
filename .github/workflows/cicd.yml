@@ -32,17 +32,12 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build Docker Image
-        # docker build \
         run: |
-          docker-compose build \
+          docker build \
           --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
           --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
           --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
@@ -50,14 +45,11 @@ jobs:
           --build-arg NAVER_SECRET=${{ secrets.NAVER_SECRET }} \
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
-          --no-cache
-
-        # --no-cache --progress=plain -t hangakim/keyword_finder .
+          --no-cache --progress=plain -t hangakim/keyword_finder .
         # run: docker build --no-cache --progress=plain -t hangakim/keyword_finder .
 
       - name: Push Docker Image
-        run: docker-compose push
-        # run: docker push hangakim/keyword_finder:latest
+        run: docker push hangakim/keyword_finder:latest
 
   deploy:
     needs: build
@@ -89,4 +81,6 @@ jobs:
       - name: Deploy with Docker Compose
         run: docker-compose --env-file ./.env up -d
 
+      - name: TEST
+        run: docker exec -it keyword_finder_public-nginx-1 /bin/sh -c "ls -l /etc/nginx/"
         # run: docker-compose up -d
