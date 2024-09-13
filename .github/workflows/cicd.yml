@@ -51,7 +51,7 @@ jobs:
           --build-arg NAVER_SECRET=${{ secrets.NAVER_SECRET }} \
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
-          --no cache
+          --no-cache
         #--no-cache --progress=plain -t hangakim/keyword_finder .
         # run: docker build --no-cache --progress=plain -t hangakim/keyword_finder .
 
