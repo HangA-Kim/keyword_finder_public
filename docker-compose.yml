@@ -22,7 +22,7 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     depends_on:
       - app
     ports:
