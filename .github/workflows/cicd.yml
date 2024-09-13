@@ -71,7 +71,7 @@ jobs:
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
       - name: Pull image from docker hub
-        run: docker-compose pull
+        run: docker pull hangakim/keyword_finder:latest
 
       # - name: Delete existing container
       #   run: docker rm -f kfContainer || true

@@ -20,8 +20,6 @@ services:
     #   - "3000" # 네트워크 내부에서 접근 가능하도록 설정
 
   nginx:
-    # image: hangakim/keyword_finder:latest
-    # build: ./nginx
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
