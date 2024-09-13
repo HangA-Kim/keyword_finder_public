@@ -65,7 +65,8 @@ jobs:
         run: docker images
 
       - name: Push Docker Image
-        run: docker push hangakim/keyword_finder:latest
+        run: docker-compose push
+        # run: docker push hangakim/keyword_finder:latest
 
   deploy:
     needs: build
@@ -87,7 +88,8 @@ jobs:
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
       - name: Pull image from docker hub
-        run: docker pull hangakim/keyword_finder:latest
+        run: docker-compose pull
+        # run: docker pull hangakim/keyword_finder:latest
 
       # - name: Delete existing container
       #   run: docker rm -f kfContainer || true
