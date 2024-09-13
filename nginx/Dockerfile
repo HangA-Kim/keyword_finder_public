@@ -6,6 +6,8 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy the custom Nginx configuration file
 COPY ./nginx/kf_nginx.conf /etc/nginx/nginx.conf
 
+RUN ls -l /etc/nginx/nginx.conf
+
 
 # WORKDIR /usr/share/nginx/html
 
