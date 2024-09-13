@@ -46,7 +46,7 @@ jobs:
       #docker build \
       - name: Build Docker Image
         run: |
-          docker-compose build \
+          DOCKER_BUILDKIT=1 docker-compose build \
           --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
           --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
           --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
