@@ -36,8 +36,9 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
+        # docker build \
         run: |
-          docker build \
+          docker-compose build \
           --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
           --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
           --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
@@ -45,11 +46,14 @@ jobs:
           --build-arg NAVER_SECRET=${{ secrets.NAVER_SECRET }} \
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
-          --no-cache --progress=plain -t hangakim/keyword_finder .
+          --no-cache
+
+        # --no-cache --progress=plain -t hangakim/keyword_finder .
         # run: docker build --no-cache --progress=plain -t hangakim/keyword_finder .
 
       - name: Push Docker Image
-        run: docker push hangakim/keyword_finder:latest
+        run: docker-compose push
+        # run: docker push hangakim/keyword_finder:latest
 
   deploy:
     needs: build
