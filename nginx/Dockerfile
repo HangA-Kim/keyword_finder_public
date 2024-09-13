@@ -18,9 +18,9 @@ RUN ls -l /etc/nginx/nginx.conf
 
 
 # Copy the built Next.js app and public directory
-# COPY --from=build /app/.next/standalone ./.next
-# COPY --from=build /app/.next/static ./.next/static
-# COPY --from=build /app/public ./public
+# COPY --from=builder /app/.next/standalone ./.next
+# COPY --from=builder /app/.next/static ./.next/static
+# COPY --from=builder /app/public ./public
 
 EXPOSE 80
 
