@@ -1,4 +1,4 @@
-FROM nginx:1.23-alpine AS runner
+FROM nginx:1.23-alpine
 
 # Remove any existing config files
 RUN rm /etc/nginx/conf.d/default.conf
