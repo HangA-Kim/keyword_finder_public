@@ -60,7 +60,7 @@ COPY --from=builder /app/.next/static ./.next/static
 # nginx 실행 할 때 데몬 실행 기능 끔
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # ENV PORT 3000
-
+ENV NODE_ENV production
 EXPOSE 3000
 ENV PORT=3000
 
