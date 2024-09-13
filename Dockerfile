@@ -60,4 +60,5 @@ COPY --from=builder /app/.next/static ./.next/static
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # ENV PORT 3000
 
-CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start"]
+CMD ["server.js"]
