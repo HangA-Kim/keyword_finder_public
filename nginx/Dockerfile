@@ -8,3 +8,5 @@ COPY ./nginx/kf_nginx.conf /etc/nginx/nginx.conf
 COPY ./mime.types /etc/nginx/
 
 EXPOSE 80
+
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
