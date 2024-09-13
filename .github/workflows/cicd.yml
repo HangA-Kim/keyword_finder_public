@@ -32,12 +32,18 @@ jobs:
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env
 
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
+      #docker build \
       - name: Build Docker Image
         run: |
-          docker build \
+          docker-compose build \
           --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
           --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
           --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
@@ -45,7 +51,8 @@ jobs:
           --build-arg NAVER_SECRET=${{ secrets.NAVER_SECRET }} \
           --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
           --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
-          --no-cache --progress=plain -t hangakim/keyword_finder .
+          --no cache
+        #--no-cache --progress=plain -t hangakim/keyword_finder .
         # run: docker build --no-cache --progress=plain -t hangakim/keyword_finder .
 
       - name: Push Docker Image
