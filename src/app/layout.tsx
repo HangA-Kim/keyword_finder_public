@@ -9,6 +9,7 @@ import TopAppBar from "./_components/TopAppBar";
 import { ThemeProvider } from "@mui/material/styles";
 import { getServerAuthSession } from "~/server/auth";
 import theme from "~/theme";
+import SimpleBottomNavigation from "./_components/BottonNavi";
 
 export const metadata: Metadata = {
   title: "Keyword Finder",
@@ -22,12 +23,13 @@ export default async function RootLayout({
   const session = await getServerAuthSession();
   return (
     <html lang="en">
-      <body className={GeistSans.className}>
+      <body className={GeistSans.className} style={{ background: "#EFDFCC" }}>
         <TRPCReactProvider>
           <SnackbarProvider>
             <ThemeProvider theme={theme}>
               <TopAppBar session={session} />
               {children}
+              <SimpleBottomNavigation />
             </ThemeProvider>
           </SnackbarProvider>
         </TRPCReactProvider>

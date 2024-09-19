@@ -1,19 +1,36 @@
-import { Card, CardContent, CardMedia, Typography, Stack } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Stack,
+  Box,
+} from "@mui/material";
 import React from "react";
-import styles from "~/app/index.module.css";
 
 const FailLogin = () => {
   return (
-    <div className={styles.main}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyItems: "center",
+        mt: 5,
+      }}
+    >
       <Typography
         variant="h4"
         color="primary"
         fontWeight={"bold"}
-        sx={{ mb: 10 }}
+        sx={{
+          fontSize: { xs: "h6.fontSize", sm: "h4.fontSize" },
+          mb: { xs: 5, sm: 10 },
+        }}
       >
         로그인이 필요한 기능입니다.
       </Typography>
-      <Stack direction="row" spacing={4}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={4}>
         <Card sx={{ maxWidth: 500 }}>
           <CardMedia
             sx={{ height: 200 }}
@@ -49,7 +66,7 @@ const FailLogin = () => {
           </CardContent>
         </Card>
       </Stack>
-    </div>
+    </Box>
   );
 };
 

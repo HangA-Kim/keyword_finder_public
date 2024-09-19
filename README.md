@@ -11,10 +11,6 @@ Prisma
 Next.js App Router
 postgreSQL
 
-## install extension
-
-Prisma
-
 ## links
 
 - [Prisma](https://prisma.io)
@@ -36,7 +32,7 @@ prisma > migrations > key_finder > migration.sql 생성됨
 
 [ next auth 에서 signin 할때 DB 저장이 안된 사용자의 경우]
 user {
-id: 'uuid',
+id: '0000-0000-0000-0000',
 name: 'HangA Kim',
 email: '---@gmail.com',
 image: '---'
@@ -58,6 +54,20 @@ updatedAt: 2024-08-27T07:24:53.836Z
 
 next.config.js 수정
 
+## 배포방식
+
+1. github source push
+2. github > action ( .github/workflows/cicd.yml)
+3. docker-compose.yml app & nginx build > push ( ./Dockerfile, ./nginx/Dockerfile )
+4. deploy : docker-compose.yml app pull > up
+5. 3000 port : app / 80 port : nginx
+
+## 자동배포환경
+
+- github action
+- docker
+- aws ubuntu instance
+
 ## What's next? How do I make an app with this?
 
 We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
@@ -67,9 +77,9 @@ If you are not familiar with the different technologies used in this project, pl
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
+- [docker](https://create.t3.gg/en/deployment/docker)
 
 ## Learn More
 

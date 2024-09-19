@@ -41,7 +41,7 @@ function MainReco() {
     >
       <FormControl component="fieldset" variant="standard">
         <FormGroup>
-          <Stack direction={"row"} spacing={4}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={4}>
             <TextField
               id="outlined-search"
               label="카테고리"

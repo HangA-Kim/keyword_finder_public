@@ -1,15 +1,23 @@
 "use client";
 
 import * as React from "react";
-import { Tabs, Tab, Typography, Stack, AppBar } from "@mui/material";
-import Link from "next/link";
+import {
+  Typography,
+  Stack,
+  AppBar,
+  Container,
+  Toolbar,
+  Box,
+} from "@mui/material";
 import { Session } from "next-auth";
-import RecommendIcon from "@mui/icons-material/Recommend";
-import BarChartIcon from "@mui/icons-material/BarChart";
+
 import LogoutState from "./auth/LogoutState";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { usePathname } from "next/navigation";
 import LoginState from "./auth/LoginState";
+import TabMenu from "./TabMenu";
+import MobileLoginState from "./auth/MobileLoginState";
+import MobileLogoutState from "./auth/MobileLogoutState";
 
 interface TopAppBarProps {
   session: Session | null;
@@ -17,15 +25,18 @@ interface TopAppBarProps {
 function TopAppBar({ session }: TopAppBarProps) {
   const pathName = usePathname();
   console.log(pathName);
-  const [selectedTab, setSelectedTab] = React.useState("ans");
 
-  React.useEffect(() => {
-    setSelectedTab(pathName === "/reco" ? "reco" : "ans");
-  }, []);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const pages = ["키워드 분석", "키워드 추천"];
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    // console.log("newValue", newValue);
-    setSelectedTab(newValue);
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   return (
@@ -33,78 +44,65 @@ function TopAppBar({ session }: TopAppBarProps) {
       {pathName === "/errAuth" ? (
         <></>
       ) : (
-        <AppBar position="static">
-          <Stack
-            direction="row"
-            spacing={2}
-            flexGrow={1}
-            sx={{
-              justifyContent: "space-between",
-              alignItems: "center",
-              ml: 2,
-              mr: 2,
-            }}
-          >
-            <Stack direction="row" sx={{ alignItems: "center" }}>
-              <LocationSearchingIcon />
-              <Typography
-                variant="h5"
-                fontWeight={"bold"}
-                noWrap
-                component="div"
-                color="#f6dba6"
-                sx={{ ml: 2 }}
-              >
-                KEYWORD FINDER
-              </Typography>
-            </Stack>
-            <Tabs
-              value={selectedTab}
-              onChange={handleChange}
-              textColor="inherit"
-              indicatorColor="secondary"
-              centered
-            >
-              <Tab
-                value="ans"
-                label={
-                  <Link href="/">
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                      키워드 분석
-                    </Typography>
-                  </Link>
-                }
-                icon={<BarChartIcon />}
-                iconPosition="start"
-              />
-              <Tab
-                value="reco"
-                label={
-                  <Link href="/reco">
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                      키워드 추천
-                    </Typography>
-                  </Link>
-                }
-                icon={<RecommendIcon />}
-                iconPosition="start"
-                sx={{ ml: 3 }}
-              />
-            </Tabs>
-            {session ? (
-              <LoginState
-                name={session.user.name}
-                imgPath={session.user.image}
-              />
-            ) : (
-              <LogoutState
-                isDark={true}
-                isFontLarge={false}
-                isOnlyLogin={false}
-              />
-            )}
-          </Stack>
-        </AppBar>
+        <>
+          <AppBar position="static">
+            <Container maxWidth="xl">
+              <Toolbar disableGutters>
+                <LocationSearchingIcon sx={{ mr: 1 }} />
+                <Typography
+                  variant="h5"
+                  fontWeight={"bold"}
+                  component="a"
+                  href="/"
+                  color="#f6dba6"
+                  sx={{ ml: 2 }}
+                >
+                  KEYWORD FINDER
+                </Typography>
+                <Box sx={{ display: { md: "none", sx: "flex" }, ml: "auto" }}>
+                  {session ? (
+                    <MobileLoginState imgPath={session.user.image} />
+                  ) : (
+                    <MobileLogoutState />
+                  )}
+                </Box>
+
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  flexGrow={1}
+                  sx={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    ml: 2,
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                  }}
+                >
+                  <div></div>
+                  <TabMenu />
+                  {session ? (
+                    <LoginState
+                      name={session.user.name}
+                      imgPath={session.user.image}
+                    />
+                  ) : (
+                    <LogoutState
+                      isDark={true}
+                      isFontLarge={false}
+                      isOnlyLogin={false}
+                    />
+                  )}
+                </Stack>
+              </Toolbar>
+            </Container>
+            {/* <Container>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <TabMenu />
+              </Box>
+            </Container> */}
+          </AppBar>
+        </>
       )}
     </>
   );

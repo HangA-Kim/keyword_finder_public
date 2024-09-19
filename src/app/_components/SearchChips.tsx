@@ -1,6 +1,6 @@
 "use client";
 
-import { Chip, Stack } from "@mui/material";
+import { Chip, Box } from "@mui/material";
 import React from "react";
 
 interface SearchChipsProps {
@@ -17,16 +17,24 @@ const SearchChips: React.FunctionComponent<SearchChipsProps> = ({
   // console.log("SearchChips:", keywordList);
 
   return (
-    <Stack direction="row" spacing={1}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
+    >
       {keywordList.map((keyword, idx) => (
         <Chip
           key={idx}
           label={keyword.word}
           onDelete={(e) => deleteKeyword(keyword.word)}
           onClick={(e) => clickKeyword(keyword.word)}
+          sx={{ mr: 1, mb: 1 }}
         />
       ))}
-    </Stack>
+    </Box>
   );
 };
 

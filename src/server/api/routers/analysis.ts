@@ -56,13 +56,14 @@ export const analysisRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       console.log("saveKeyword call!!!!!!!!!!!!", input.keyword);
       // 중복된 keyword가 있는지 확인
-      const existingKeyword = await ctx.db.keyword.findUnique({
-        where: { word: input.keyword },
+      const existingKeyword = await ctx.db.keyword.findFirst({
+        where: { word: input.keyword, createdById: ctx.session.user.id },
       });
 
       if (existingKeyword) {
         // 중복된 경우 처리 (예: 에러 던지기)
         // throw new Error("Keyword already exists");
+        console.log("already keyword > ", input.keyword);
         return null;
       }
 
@@ -89,8 +90,8 @@ export const analysisRouter = createTRPCRouter({
   deleteKeyword: protectedProcedure
     .input(z.object({ keyword: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
-      const keywords = await ctx.db.keyword.delete({
-        where: { word: input.keyword },
+      const keywords = await ctx.db.keyword.deleteMany({
+        where: { word: input.keyword, createdById: ctx.session.user.id },
       });
       console.log("deleteKeyword:", keywords);
       return keywords ?? [];

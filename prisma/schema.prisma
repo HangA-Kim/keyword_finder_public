@@ -31,7 +31,7 @@ model Post {
 
 model Keyword {
     id        Int      @id @default(autoincrement())
-    word      String   @unique
+    word      String   
     createdAt DateTime @default(now())
     createdBy   User   @relation(fields: [createdById], references: [id])
     createdById String

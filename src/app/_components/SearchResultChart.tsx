@@ -21,18 +21,18 @@ const SearchResultChart = ({ searchData }: SearchResultChartProps) => {
         position: "relative",
         width: "100%",
         height: 0,
-        paddingTop: "45%", // 16:9 비율을 유지하고 싶다면 padding-top을 56.25%로 설정
-        borderRadius: 10,
+        paddingTop: { xs: "70%", sm: "33%" }, // 16:9 비율을 유지하고 싶다면 padding-top을 56.25%로 설정
         overflow: "hidden",
       }}
     >
       <Box
         sx={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: { xs: "100%", sm: "80%" },
+          height: { xs: "100%", sm: "80%" },
         }}
       >
         {searchData ? (
@@ -41,7 +41,13 @@ const SearchResultChart = ({ searchData }: SearchResultChartProps) => {
             borderRadius={10}
             dataset={searchData as []}
             xAxis={[{ scaleType: "band", dataKey: "period" }]}
-            series={[{ dataKey: "ratio", label: "비율" }]}
+            series={[
+              {
+                dataKey: "ratio",
+                label: "검색비율",
+                color: "#D7A184",
+              },
+            ]}
             grid={{ horizontal: true }}
           />
         ) : (

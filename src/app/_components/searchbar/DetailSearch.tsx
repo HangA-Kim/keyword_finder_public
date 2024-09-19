@@ -31,68 +31,99 @@ interface DetailSearchProps {
 }
 const DetailSearch = (props: DetailSearchProps) => {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <Select
-        value={props.timeUnit}
-        onChange={(e) => props.setTimeUnit(e.target.value)}
-        sx={{ mr: 2 }}
-      >
-        <MenuItem value={"date"} selected={true}>
-          일간 기준검색
-        </MenuItem>
-        <MenuItem value={"week"}>주간 기준검색</MenuItem>
-        <MenuItem value={"month"}>월간 기준검색</MenuItem>
-      </Select>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer
-          components={["DatePicker"]}
-          sx={{ mr: 2, height: "100%" }}
-        >
-          <DatePicker
-            name="date"
-            label="검색 시작 날짜"
-            defaultValue={props.startDate}
-            onChange={(newValue: Dayjs | null) => {
-              if (newValue) props.setStartDate(newValue);
-            }}
-            format="YYYY-MM-DD"
-          />
-        </DemoContainer>
-      </LocalizationProvider>
-      <FormControl
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" }, // 모바일에서는 세로, PC에서는 가로
+        alignItems: { xs: "flex-start", sm: "center" }, // 모바일에서는 위쪽 정렬, PC에서는 가운데 정렬
+        justifyContent: { xs: "flex-start", sm: "center" }, // 모바일에서는 왼쪽 정렬, PC에서는 가운데 정렬
+        gap: 2, // 컴포넌트 간의 간격 설정
+        px: { sm: 2 }, // PC 화면에서 좌우 패딩 추가
+        mt: 3,
+      }}
+    >
+      <Box
         sx={{
-          mr: 1,
-          pl: 1,
-          pr: 1,
+          display: "flex",
+          flexDirection: "row", // 모바일과 PC 모두 가로로 배치
+          gap: {xs:1, sm:2}, // 컴포넌트 간의 간격 설정
+          mb: { xs: 2, sm: 0 }, // 모바일에서 아래 여백 추가
+          justifyContent: "center", // 가로 가운데 정렬
+          alignContent: "center",
         }}
       >
-        <FormLabel id="demo-row-radio-buttons-group-label">디바이스</FormLabel>
-        <RadioGroup
-          row
-          value={props.device}
-          onChange={(e) => props.setDevice(e.target.value)}
+        <Select
+          value={props.timeUnit}
+          onChange={(e) => props.setTimeUnit(e.target.value)}
+          sx={{
+            mr: { sm: 2 },
+          }}
         >
-          <FormControlLabel value="pc" control={<Radio />} label="PC" />
-          <FormControlLabel value="mo" control={<Radio />} label="모바일" />
-        </RadioGroup>
-      </FormControl>
-      <FormControl
+          <MenuItem value={"date"} selected={true}>
+            일간 기준검색
+          </MenuItem>
+          <MenuItem value={"week"}>주간 기준검색</MenuItem>
+          <MenuItem value={"month"}>월간 기준검색</MenuItem>
+        </Select>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={["DatePicker"]}>
+            <DatePicker
+              name="date"
+              label="검색 시작 날짜"
+              defaultValue={props.startDate}
+              onChange={(newValue: Dayjs | null) => {
+                if (newValue) props.setStartDate(newValue);
+              }}
+              format="YYYY-MM-DD"
+            />
+          </DemoContainer>
+        </LocalizationProvider>
+      </Box>
+      <Box
         sx={{
-          mr: 2,
-          pl: 1,
-          pr: 1,
+          display: "flex",
+          flexDirection: { xs: "row", sm: "row" }, // 모바일과 PC 모두 가로로 배치
+          gap: 2, // 컴포넌트 간의 간격 설정
+          justifyContent: "center", // 가로 가운데 정렬
         }}
       >
-        <FormLabel id="demo-row-radio-buttons-group-label">성별</FormLabel>
-        <RadioGroup
-          row
-          value={props.gender}
-          onChange={(e) => props.setGender(e.target.value)}
+        <FormControl
+          sx={{
+            mr: { sm: 1 }, // PC에서 오른쪽 여백 추가
+            pl: 1,
+            pr: 1,
+          }}
         >
-          <FormControlLabel value="m" control={<Radio />} label="남성" />
-          <FormControlLabel value="f" control={<Radio />} label="여성" />
-        </RadioGroup>
-      </FormControl>
+          <FormLabel id="demo-row-radio-buttons-group-label">
+            디바이스
+          </FormLabel>
+          <RadioGroup
+            row
+            value={props.device}
+            onChange={(e) => props.setDevice(e.target.value)}
+          >
+            <FormControlLabel value="pc" control={<Radio />} label="PC" />
+            <FormControlLabel value="mo" control={<Radio />} label="모바일" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl
+          sx={{
+            mr: { sm: 2 }, // PC에서 오른쪽 여백 추가
+            pl: 1,
+            pr: 1,
+          }}
+        >
+          <FormLabel id="demo-row-radio-buttons-group-label">성별</FormLabel>
+          <RadioGroup
+            row
+            value={props.gender}
+            onChange={(e) => props.setGender(e.target.value)}
+          >
+            <FormControlLabel value="m" control={<Radio />} label="남성" />
+            <FormControlLabel value="f" control={<Radio />} label="여성" />
+          </RadioGroup>
+        </FormControl>
+      </Box>
     </Box>
   );
 };

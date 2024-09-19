@@ -89,16 +89,5 @@ jobs:
 
       - name: Pull image from docker hub
         run: docker-compose pull
-        # run: docker pull hangakim/keyword_finder:latest
-
-      # - name: Delete existing container
-      #   run: docker rm -f kfContainer || true
-      # - name: Run container
-      # run: docker run -d -p 80:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
-      # run: docker run -d -p 3000:80 --name kfContainer --env-file .env hangakim/keyword_finder:latest
       - name: Deploy with Docker Compose
         run: docker-compose --env-file ./.env up -d
-
-      # - name: TEST
-      #   run: docker exec -it keyword_finder_public-nginx-1 /bin/sh -c "ls -l /etc/nginx/"
-      # run: docker-compose up -d

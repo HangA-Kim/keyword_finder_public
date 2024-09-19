@@ -12,7 +12,7 @@ import {
 } from "~/common/constant";
 
 export const buttonStyles = (isDark: boolean, isFontLarge: boolean) => ({
-  color: isDark ? "#fff" : "#f50057",
+  color: isDark ? "#fff" : "#BA8E7A",
   fontWeight: isFontLarge ? "bold" : "",
   fontSize: isFontLarge ? "30px" : "",
 });

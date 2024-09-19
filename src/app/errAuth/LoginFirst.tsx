@@ -1,6 +1,5 @@
 import { Typography, Stack, Box } from "@mui/material";
 import React from "react";
-import styles from "~/app/index.module.css";
 import LogoutState from "./../_components/auth/LogoutState";
 
 interface LoginFirstProps {
@@ -9,20 +8,38 @@ interface LoginFirstProps {
 
 const LoginFirst = ({ email }: LoginFirstProps) => {
   return (
-    <div className={styles.main}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyItems: "center",
+        alignItems: "center",
+        p: 5,
+      }}
+    >
       <Typography
         variant="h4"
         color="primary"
         fontWeight={"bold"}
-        sx={{ mb: 3 }}
+        sx={{ mb: 3, fontSize: { xs: "h6.fontSize", sm: "h4.fontSize" } }}
       >
         {`[ ${email} ] 계정은 `}
       </Typography>
       <Stack direction="row" sx={{ mb: 5 }}>
-        <Typography variant="h4" color="secondary" fontWeight={"bold"}>
+        <Typography
+          variant="h4"
+          color="secondary"
+          fontWeight={"bold"}
+          sx={{ fontSize: { xs: "h6.fontSize", sm: "h4.fontSize" } }}
+        >
           회원가입
         </Typography>
-        <Typography variant="h4" color="primary" fontWeight={"bold"}>
+        <Typography
+          variant="h4"
+          color="primary"
+          fontWeight={"bold"}
+          sx={{ fontSize: { xs: "h6.fontSize", sm: "h4.fontSize" } }}
+        >
           이 되어 있는 상태입니다.
         </Typography>
       </Stack>
@@ -38,7 +55,7 @@ const LoginFirst = ({ email }: LoginFirstProps) => {
       >
         <LogoutState isDark={true} isFontLarge={true} isOnlyLogin={true} />
       </Box>
-    </div>
+    </Box>
   );
 };
 

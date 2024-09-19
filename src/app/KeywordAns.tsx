@@ -75,15 +75,16 @@ const KeywordAns = ({ session }: KeywordAnsProps) => {
   return (
     <Box>
       <InputSearch search={search} keyword={searchWord} />
-      {keywordList ? (
-        <SearchChips
-          keywordList={keywordList}
-          deleteKeyword={deleteKeyword}
-          clickKeyword={selectKeyword}
-        />
-      ) : (
-        ""
-      )}
+      
+        {keywordList ? (
+          <SearchChips
+            keywordList={keywordList}
+            deleteKeyword={deleteKeyword}
+            clickKeyword={selectKeyword}
+          />
+        ) : (
+          ""
+        )}
       {typeof searchData === "string" ? (
         <p>{searchData}</p>
       ) : (
