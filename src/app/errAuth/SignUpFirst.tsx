@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import LogoutState from "../_components/auth/LogoutState";
+import Image from "next/image";
 
 const SignUpFirst = () => {
   return (
@@ -39,8 +40,10 @@ const SignUpFirst = () => {
             mb: { xs: 4, sm: 0 }, // 모바일에서는 아래 여백 추가
           }}
         >
-          <img
+          <Image
             src="/img_graph.jpg"
+            width={500} // 실제 이미지의 크기를 지정해야 함
+            height={300}
             style={{
               width: "100%",
               height: "auto",

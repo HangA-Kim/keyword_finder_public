@@ -29,8 +29,8 @@ const SearchChips: React.FunctionComponent<SearchChipsProps> = ({
         <Chip
           key={idx}
           label={keyword.word}
-          onDelete={(e) => deleteKeyword(keyword.word)}
-          onClick={(e) => clickKeyword(keyword.word)}
+          onDelete={() => deleteKeyword(keyword.word)}
+          onClick={() => clickKeyword(keyword.word)}
           sx={{ mr: 1, mb: 1 }}
         />
       ))}

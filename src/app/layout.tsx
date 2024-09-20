@@ -10,6 +10,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { getServerAuthSession } from "~/server/auth";
 import theme from "~/theme";
 import SimpleBottomNavigation from "./_components/BottonNavi";
+import { Box } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Keyword Finder",
@@ -28,8 +29,18 @@ export default async function RootLayout({
           <SnackbarProvider>
             <ThemeProvider theme={theme}>
               <TopAppBar session={session} />
-              {children}
-              <SimpleBottomNavigation />
+              <Box
+                sx={{
+                  paddingTop: { xs: "55px", sm: "70px" },
+                  paddingBottom: { xs: "50px" },
+                  minHeight: "100vh",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <main style={{ flex: 1 }}>{children}</main>
+                <SimpleBottomNavigation />
+              </Box>
             </ThemeProvider>
           </SnackbarProvider>
         </TRPCReactProvider>

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { z } from "zod";
-import { NaverRequest, NaverResponse } from "~/common/types";
+import { NaverRequest, type NaverResponse } from "~/common/types";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -8,49 +8,47 @@ import {
 } from "~/server/api/trpc";
 
 export const analysisRouter = createTRPCRouter({
-  reqNaver: publicProcedure
-    .input(NaverRequest)
-    .query(async ({ ctx, input }) => {
-      console.log("reqNaver call", input);
-      const { searchText, startDate, timeUnit, device, gender } = input;
-      const endDate = dayjs().format("YYYY-MM-DD");
-      const queryData = {
-        startDate,
-        endDate,
-        timeUnit,
-        keywordGroups: [
-          {
-            groupName: searchText,
-            keywords: [searchText],
-          },
-        ],
-        device,
-        gender,
-      };
-      const res = await fetch("https://openapi.naver.com/v1/datalab/search", {
-        method: "POST",
-        headers: {
-          "X-Naver-Client-Id": `${process.env.NAVER_ID}`,
-          "X-Naver-Client-Secret": `${process.env.NAVER_SECRET}`,
+  reqNaver: publicProcedure.input(NaverRequest).query(async ({ input }) => {
+    console.log("reqNaver call", input);
+    const { searchText, startDate, timeUnit, device, gender } = input;
+    const endDate = dayjs().format("YYYY-MM-DD");
+    const queryData = {
+      startDate,
+      endDate,
+      timeUnit,
+      keywordGroups: [
+        {
+          groupName: searchText,
+          keywords: [searchText],
         },
-        body: JSON.stringify(queryData),
-      });
-      if (res.status != 200)
-        return {
-          result: `ERR ${res.status} : ${res.statusText}`,
-        };
-      const resData = (await res.json()) as NaverResponse;
-      console.log(resData.results[0]?.data);
-      if (resData.results[0]) {
-        return {
-          result: resData.results[0],
-        };
-      } else {
-        return {
-          result: `가져올 내용 없음`,
-        };
-      }
-    }),
+      ],
+      device,
+      gender,
+    };
+    const res = await fetch("https://openapi.naver.com/v1/datalab/search", {
+      method: "POST",
+      headers: {
+        "X-Naver-Client-Id": `${process.env.NAVER_ID}`,
+        "X-Naver-Client-Secret": `${process.env.NAVER_SECRET}`,
+      },
+      body: JSON.stringify(queryData),
+    });
+    if (res.status != 200)
+      return {
+        result: `ERR ${res.status} : ${res.statusText}`,
+      };
+    const resData = (await res.json()) as NaverResponse;
+    console.log(resData.results[0]?.data);
+    if (resData.results[0]) {
+      return {
+        result: resData.results[0],
+      };
+    } else {
+      return {
+        result: `가져올 내용 없음`,
+      };
+    }
+  }),
   saveKeyword: protectedProcedure
     .input(z.object({ keyword: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {

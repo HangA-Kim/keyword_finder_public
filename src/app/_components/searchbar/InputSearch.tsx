@@ -16,7 +16,7 @@ import type { SelectChangeEvent } from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import dayjs, { type Dayjs } from "dayjs";
 import DetailSearch from "./DetailSearch";
-import { NaverRequestType } from "~/common/types";
+import type { NaverRequestType } from "~/common/types";
 
 interface InputSearchProps {
   search(requestData: NaverRequestType): void;

@@ -4,7 +4,7 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import { AdapterUser, type Adapter } from "next-auth/adapters";
+import type { AdapterUser, Adapter } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
 
 import { env } from "~/env";
@@ -12,13 +12,13 @@ import { db } from "~/server/db";
 
 import { type Account, type User } from "next-auth";
 import { cookies } from "next/headers";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import type { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import {
   AUTH_INTENT,
   INTENT_LOGIN,
   INTENT_SIGNUP,
   PARAM_ALEADY_USER,
-  PARAM_NOT_SAVED_USER
+  PARAM_NOT_SAVED_USER,
 } from "~/common/constant";
 
 /**
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
         if (intent === INTENT_LOGIN) {
           if (user.id === account.providerAccountId)
             // db 에 저장된 사용자가 없을 경우
-            return Promise.resolve("/errAuth?intent="+PARAM_NOT_SAVED_USER);
+            return Promise.resolve("/errAuth?intent=" + PARAM_NOT_SAVED_USER);
           else return true;
         } else if (intent === INTENT_SIGNUP) {
           if (user.id === account.providerAccountId) return true;

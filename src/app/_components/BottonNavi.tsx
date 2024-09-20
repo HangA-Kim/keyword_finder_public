@@ -16,7 +16,7 @@ export default function SimpleBottomNavigation() {
 
   React.useEffect(() => {
     setValue(pathName === "/reco" ? 1 : 0);
-  }, []);
+  }, [pathName]);
 
   const handleNavigation = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -34,11 +34,18 @@ export default function SimpleBottomNavigation() {
         bottom: 0,
         left: 0,
         right: 0,
-        display: { xs: "inherit", sm: "none" },
+        display: { xs: "flex", sm: "none" },
+        justifyContent: "center", // 중앙 정렬
+        alignItems: "center", // 수직 중앙 정렬
       }}
       elevation={3}
     >
-      <BottomNavigation showLabels value={value} onChange={handleNavigation}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={handleNavigation}
+        sx={{ width: "100%" }}
+      >
         <BottomNavigationAction label="키워드 분석" icon={<BarChartIcon />} />
         <BottomNavigationAction label="키워드 추천" icon={<RecommendIcon />} />
       </BottomNavigation>

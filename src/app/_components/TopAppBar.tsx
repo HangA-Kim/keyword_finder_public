@@ -9,7 +9,7 @@ import {
   Toolbar,
   Box,
 } from "@mui/material";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 
 import LogoutState from "./auth/LogoutState";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
@@ -26,25 +26,18 @@ function TopAppBar({ session }: TopAppBarProps) {
   const pathName = usePathname();
   console.log(pathName);
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const pages = ["키워드 분석", "키워드 추천"];
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   return (
     <>
       {pathName === "/errAuth" ? (
         <></>
       ) : (
-        <>
+        <Box sx={{
+          position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                zIndex: 1200, // MUI의 기본 zIndex 값
+        }}>
           <AppBar position="static">
             <Container maxWidth="xl">
               <Toolbar disableGutters>
@@ -102,7 +95,7 @@ function TopAppBar({ session }: TopAppBarProps) {
               </Box>
             </Container> */}
           </AppBar>
-        </>
+        </Box>
       )}
     </>
   );

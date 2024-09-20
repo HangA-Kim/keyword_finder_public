@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, IconButton, Menu, Tooltip } from "@mui/material";
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutBtn from "./LogoutBtn";
@@ -37,7 +29,13 @@ const MobileLoginState = (props: MobileLoginStateProps) => {
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{ mt: "45px" }}
+        sx={{
+          mt: "45px",
+          "& .MuiPaper-root": {
+            // 여기에 Paper의 스타일을 추가하세요
+            backgroundColor: "primary.main", // 예시로 배경색을 설정
+          },
+        }}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
@@ -51,11 +49,6 @@ const MobileLoginState = (props: MobileLoginStateProps) => {
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
-        PaperProps={{
-          sx: {
-            backgroundColor: (theme) => theme.palette.primary.main, // 배경색을 primary로 설정
-          },
-        }}
       >
         <LogoutBtn />
       </Menu>

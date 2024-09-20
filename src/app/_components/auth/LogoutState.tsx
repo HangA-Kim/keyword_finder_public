@@ -38,14 +38,14 @@ const LogoutState = ({
     <Stack direction="row" spacing={2}>
       <Button
         sx={buttonStyles(isDark, isFontLarge)}
-        onClick={(e) => handleSignin(INTENT_LOGIN)}
+        onClick={() => handleSignin(INTENT_LOGIN)}
       >
         LOGIN
       </Button>
       {!isOnlyLogin && (
         <Button
           sx={buttonStyles(isDark, isFontLarge)}
-          onClick={(e) => handleSignin(INTENT_SIGNUP)}
+          onClick={() => handleSignin(INTENT_SIGNUP)}
         >
           SIGNUP
         </Button>

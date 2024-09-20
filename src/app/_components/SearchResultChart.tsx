@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { NaverResponseData } from "~/common/types";
+import type { NaverResponseData } from "~/common/types";
 import { Box } from "@mui/material";
 
 interface SearchResultChartProps {

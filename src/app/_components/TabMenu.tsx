@@ -13,7 +13,7 @@ const TabMenu = () => {
 
   React.useEffect(() => {
     setSelectedTab(pathName === "/reco" ? "reco" : "ans");
-  }, []);
+  }, [pathName]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     // console.log("newValue", newValue);
