@@ -15,6 +15,11 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 - [nextauthCallback](https://next-auth.js.org/configuration/callbacks)
 - [nextauthCallbackKor](https://velog.io/@j_wisdom_h/next-auth)
 
+https://datamoney.tistory.com/339
+https://yeko90.tistory.com/entry/how-to-use-google-trend-api
+https://tagmanager.kr/google-trends-api-data-analysis/
+https://github.com/GeneralMills/pytrends
+
 ## comment
 
 - npx prisma migrate dev : sql 파일 생성 및 DB 적용
