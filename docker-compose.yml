@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hangakim/keyword_finder:app
+    env_file:
+      - .env
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: hangakim/keyword_finder:nginx
+    depends_on:
+      - app
+    ports:
+      - "80:80"
