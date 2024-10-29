@@ -26,3 +26,18 @@ export interface NaverResponse {
   timeUnit: string;
   results: NaverResponseResult[];
 }
+
+interface KeywordData {
+  period: string;
+  ratio: number;
+}
+export interface TrendsDatas {
+  keyword: string;
+  google_data: KeywordData[];
+  naver_data: KeywordData[];
+}
+
+export interface AgeDatas {
+  group: string;
+  data: KeywordData[];
+}

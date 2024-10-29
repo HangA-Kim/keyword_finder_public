@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import InputSearch from "./_components/searchbar/InputSearch";
+import InputSearch from "./_components/analysis/InputSearch";
 import { Box } from "@mui/material";
 import { api } from "~/trpc/react";
 // import SearchResultChart from "./SearchResultChart";
-import SearchResultChart from "./_components/SearchResultChart";
+import SearchResultChart from "./_components/analysis/SearchResultChart";
 import type { NaverRequestType, NaverResponseResult } from "~/common/types";
 import type { Session } from "next-auth";
 import SearchChips from "./_components/SearchChips";
@@ -33,7 +33,7 @@ const KeywordAns = ({ session }: KeywordAnsProps) => {
     },
   });
 
-  const search = async (requestData: NaverRequestType) => {
+  const searchNaver = async (requestData: NaverRequestType) => {
     const data = await utils.analysis.reqNaver.fetch(requestData);
 
     if (session)
@@ -58,7 +58,7 @@ const KeywordAns = ({ session }: KeywordAnsProps) => {
   };
   return (
     <Box>
-      <InputSearch search={search} keyword={searchWord} />
+      <InputSearch search={searchNaver} keyword={searchWord} />
 
       {keywordList ? (
         <SearchChips

@@ -17,6 +17,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import dayjs, { type Dayjs } from "dayjs";
 import DetailSearch from "./DetailSearch";
 import type { NaverRequestType } from "~/common/types";
+import DefaultWithMobile from "../select/SelectDefaultWithMobile";
+
 
 interface InputSearchProps {
   search(requestData: NaverRequestType): void;
@@ -36,13 +38,10 @@ const InputSearch = (props: InputSearchProps) => {
   const [gender, setGender] = React.useState("f");
   // const [ages, setAges] = React.useState("5");
 
+
   useEffect(() => {
     setInputText(props.keyword);
   }, [props.keyword]);
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setEngine(event.target.value);
-  };
 
   const handleSearch = () => {
     console.log("input text ", inputText);
@@ -80,20 +79,6 @@ const InputSearch = (props: InputSearchProps) => {
             width: { xs: "100%", sm: "auto" }, // 모바일: 가로 100%
           }}
         >
-          <FormControl
-            sx={{
-              minWidth: 120,
-              mr: { sm: 2, xs: 0 }, // PC: 오른쪽 여백, 모바일: 없음
-              mb: { xs: 0, sm: 0 }, // 모바일에서는 여백 없음
-            }}
-          >
-            <Select value={engine} onChange={handleChange}>
-              <MenuItem value={"naver"} selected={true}>
-                NAVER
-              </MenuItem>
-              <MenuItem value={"google"}>GOOGLE</MenuItem>
-            </Select>
-          </FormControl>
 
           <Paper
             variant="outlined"

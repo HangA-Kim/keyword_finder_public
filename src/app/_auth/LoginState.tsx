@@ -3,7 +3,8 @@
 import { Avatar, Chip, Stack } from "@mui/material";
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import LogoutBtn from "./LogoutBtn";
+import CustomColorBtn from "../_components/button/CustomColorBtn";
+import { whiteColor } from "~/styles/colors";
 
 interface LoginStateProps {
   name: string | null | undefined;
@@ -23,10 +24,10 @@ const LoginState = (props: LoginStateProps) => {
             label={props.name}
             color="primary"
           />
-          <LogoutBtn />
+          <CustomColorBtn link="/api/auth/signout" text="LOGOUT" color={whiteColor} />
         </Stack>
       ) : (
-        <LogoutBtn />
+        <CustomColorBtn link="/api/auth/signout" text="LOGOUT" color={whiteColor} />
       )}
     </>
   );

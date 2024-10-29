@@ -12,7 +12,7 @@ const TabMenu = () => {
   const [selectedTab, setSelectedTab] = React.useState("ans");
 
   React.useEffect(() => {
-    setSelectedTab(pathName === "/reco" ? "reco" : "ans");
+    setSelectedTab(pathName === "/recommand" ? "recommand" : "ans");
   }, [pathName]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -43,9 +43,9 @@ const TabMenu = () => {
         iconPosition="start"
       />
       <Tab
-        value="reco"
+        value="recommand"
         label={
-          <Link href="/reco">
+          <Link href="/recommand">
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
               키워드 추천
             </Typography>

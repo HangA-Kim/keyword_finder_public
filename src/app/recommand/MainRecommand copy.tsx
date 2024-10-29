@@ -9,10 +9,10 @@ import {
   Box,
 } from "@mui/material";
 import React, { useState } from "react";
-import InputKeyword from "../_components/searchbar/InputKeyword";
+import InputKeyword from "../_components/recommand/InputKeyword";
 import { useSnackbar } from "~/app/_context/SnackbarContext";
 
-function MainReco() {
+function MainRecommand() {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const { showSnackbar } = useSnackbar();
@@ -78,4 +78,4 @@ function MainReco() {
   );
 }
 
-export default MainReco;
+export default MainRecommand;

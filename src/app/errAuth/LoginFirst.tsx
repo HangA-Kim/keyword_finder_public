@@ -1,6 +1,7 @@
 import { Typography, Stack, Box } from "@mui/material";
 import React from "react";
-import LogoutState from "./../_components/auth/LogoutState";
+import LogoutState from "../_auth/LogoutState";
+import { lightGray, lightBlue } from "~/styles/colors";
 
 interface LoginFirstProps {
   email: string;
@@ -47,8 +48,8 @@ const LoginFirst = ({ email }: LoginFirstProps) => {
         sx={{
           border: 1,
           borderRadius: "10px",
-          borderColor: "#ddd",
-          backgroundColor: "#608294",
+          borderColor: lightGray,
+          backgroundColor: lightBlue,
           pl: 1,
           pr: 1,
         }}

@@ -11,6 +11,7 @@ import { getServerAuthSession } from "~/server/auth";
 import theme from "~/theme";
 import SimpleBottomNavigation from "./_components/BottonNavi";
 import { Box } from "@mui/material";
+import { bgColor } from "~/styles/colors";
 
 export const metadata: Metadata = {
   title: "Keyword Finder",
@@ -24,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerAuthSession();
   return (
     <html lang="en">
-      <body className={GeistSans.className} style={{ background: "#EFDFCC" }}>
+      <body className={GeistSans.className} style={{ background: bgColor }}>
         <TRPCReactProvider>
           <SnackbarProvider>
             <ThemeProvider theme={theme}>

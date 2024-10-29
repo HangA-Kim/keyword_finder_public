@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import LogoutState from "../_components/auth/LogoutState";
+import LogoutState from "../_auth/LogoutState";
 import Image from "next/image";
 
 const SignUpFirst = () => {

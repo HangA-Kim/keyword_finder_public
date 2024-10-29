@@ -25,6 +25,7 @@ model Post {
     createdBy   User   @relation(fields: [createdById], references: [id])
     createdById String
     categories Category[]
+    deleted    Boolean    @default(false)
 
     @@index([title])
 }

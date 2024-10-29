@@ -4,6 +4,7 @@ import React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import type { NaverResponseData } from "~/common/types";
 import { Box } from "@mui/material";
+import { orangeBrown } from "~/styles/colors";
 
 interface SearchResultChartProps {
   searchData: NaverResponseData[];
@@ -45,7 +46,7 @@ const SearchResultChart = ({ searchData }: SearchResultChartProps) => {
               {
                 dataKey: "ratio",
                 label: "검색비율",
-                color: "#D7A184",
+                color: orangeBrown,
               },
             ]}
             grid={{ horizontal: true }}

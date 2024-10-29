@@ -1,7 +1,7 @@
 "use client";
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-
+import { lightGreen, brown, bgColor, paperColor, textColor } from "~/styles/colors";
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
@@ -12,17 +12,17 @@ const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#66796B",
+      main: lightGreen,
     },
     secondary: {
-      main: "#BA8E7A",
+      main: brown,
     },
     background: {
-      default: "#EFDFCC",
-      paper: "#d4c2ad",
+      default: bgColor,
+      paper: paperColor,
     },
     text: {
-      primary: "#5d4037",
+      primary: textColor,
     },
   },
   typography: {

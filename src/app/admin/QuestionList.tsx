@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
+import { darkBrown } from "~/styles/colors";
 
 interface Column {
   id: "state" | "title" | "email" | "questionDate" | "answerDate";
@@ -82,7 +83,7 @@ const rows = [
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#5d4037",
+    backgroundColor: darkBrown,
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {

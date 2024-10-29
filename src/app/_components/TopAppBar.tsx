@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 import type { Session } from "next-auth";
 
-import LogoutState from "./auth/LogoutState";
+import LogoutState from "../_auth/LogoutState";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { usePathname } from "next/navigation";
-import LoginState from "./auth/LoginState";
+import LoginState from "../_auth/LoginState";
 import TabMenu from "./TabMenu";
-import MobileLoginState from "./auth/MobileLoginState";
-import MobileLogoutState from "./auth/MobileLogoutState";
+import MobileLoginState from "../_auth/MobileLoginState";
+import MobileLogoutState from "../_auth/MobileLogoutState";
+import { logoColor } from "~/styles/colors";
 
 interface TopAppBarProps {
   session: Session | null;
@@ -47,7 +48,7 @@ function TopAppBar({ session }: TopAppBarProps) {
                   fontWeight={"bold"}
                   component="a"
                   href="/"
-                  color="#f6dba6"
+                  color={logoColor}
                   sx={{ ml: 2 }}
                 >
                   KEYWORD FINDER

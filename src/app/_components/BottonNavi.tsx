@@ -15,7 +15,7 @@ export default function SimpleBottomNavigation() {
   const router = useRouter();
 
   React.useEffect(() => {
-    setValue(pathName === "/reco" ? 1 : 0);
+    setValue(pathName === "/recommand" ? 1 : 0);
   }, [pathName]);
 
   const handleNavigation = (event: React.SyntheticEvent, newValue: number) => {
@@ -23,7 +23,7 @@ export default function SimpleBottomNavigation() {
     if (newValue === 0) {
       router.push("/"); // '키워드 분석' 클릭 시
     } else if (newValue === 1) {
-      router.push("/reco"); // '키워드 추천' 클릭 시
+      router.push("/recommand"); // '키워드 추천' 클릭 시
     }
   };
 

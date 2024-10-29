@@ -4,6 +4,8 @@ import { Button, Stack } from "@mui/material";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { whiteColor, brown } from "~/styles/colors";
+
 import {
   AUTH_INTENT,
   INTENT_LOGIN,
@@ -12,7 +14,7 @@ import {
 } from "~/common/constant";
 
 export const buttonStyles = (isDark: boolean, isFontLarge: boolean) => ({
-  color: isDark ? "#fff" : "#BA8E7A",
+  color: isDark ? whiteColor : brown,
   fontWeight: isFontLarge ? "bold" : "",
   fontSize: isFontLarge ? "30px" : "",
 });
