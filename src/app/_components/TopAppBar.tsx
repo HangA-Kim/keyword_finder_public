@@ -15,7 +15,7 @@ import LogoutState from "../_auth/LogoutState";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { usePathname } from "next/navigation";
 import LoginState from "../_auth/LoginState";
-import TabMenu from "./TabMenu";
+import TabMenu from "./tab/TabMenu";
 import MobileLoginState from "../_auth/MobileLoginState";
 import MobileLogoutState from "../_auth/MobileLogoutState";
 import { logoColor } from "~/styles/colors";

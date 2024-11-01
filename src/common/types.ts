@@ -31,10 +31,22 @@ interface KeywordData {
   period: string;
   ratio: number;
 }
+
+export interface KeywordAverage {
+  rank: string;
+  google_keyword: string;
+  naver_keyword: string;
+}
+
 export interface TrendsDatas {
   keyword: string;
   google_data: KeywordData[];
   naver_data: KeywordData[];
+}
+
+export interface AnalysisDatas {
+  trendsData: TrendsDatas[];
+  averageData: KeywordAverage[];
 }
 
 export interface AgeDatas {
