@@ -1,10 +1,10 @@
-import { AnalysisDatas } from "~/common/types";
+import { ShoppingDatas, APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
 
 export const BASE_URL = 'http://127.0.0.1:8000';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;
 export const GET_ANALYSIS_KEYWORD_URL = `${BASE_URL}/analysis/keywords`;
-export const GET_AGE_URL = `${BASE_URL}/analysis/shoping/age`;
-export const GET_GENDER_URL = `${BASE_URL}/analysis/shoping/gender`;
+export const GET_SHOPPING_AGE_URL = `${BASE_URL}/analysis/shopping/age`;
+export const GET_SHOPPING_GENDER_URL = `${BASE_URL}/analysis/shopping/gender`;
 export const GET_RECOMMAND_KEYWORD_URL = `${BASE_URL}/openai/recommand`;
 
 export const getCategory = async (category_name: string, sub_category_name: string) => {
@@ -40,10 +40,37 @@ export const analysisKeywords = async(time_unit:string, ...keywords) => {
     const keywordString = keywords.join(','); 
     const url = `${GET_ANALYSIS_KEYWORD_URL}?keywords=${encodeURIComponent(keywordString)}&time_unit=${time_unit}`;
     const res = await fetch(url);
-    const data = await res.json() as AnalysisDatas;
+    const data = await res.json() as APIAnalysisDatas;
     return data;
   } catch (error) {
     console.error('Error fetching analysisKeywords:', error);
     return null;
   }
 }
+
+
+const getShoppingData = async(shopping_url:string, time_unit:string, keywords:string[], categorys:string[]) => {
+  console.log('shopping_url', shopping_url)
+  console.log('time_unit', time_unit)
+  console.log('keywords', keywords)
+  console.log('categorys', categorys)
+  try{
+    const categoryString = categorys.join(','); 
+    const keywordString = keywords.join(',');
+    const url = `${shopping_url}?categorys=${encodeURIComponent(categoryString)}&keywords=${encodeURIComponent(keywordString)}&time_unit=${time_unit}`;
+    const res = await fetch(url);
+    const data = await res.json() as APIShoppingDatas;
+    return data;
+  } catch (error) {
+    console.error('Error fetching analysisKeywords:', error);
+    return null;
+  }
+}
+export const shoppingAge = async(time_unit:string, keywords:string[], ...categorys) => {
+  return getShoppingData(GET_SHOPPING_AGE_URL, time_unit, keywords, categorys)
+}
+
+export const shoppingGender = async(time_unit:string, keywords:string[], ...categorys) => {
+  return getShoppingData(GET_SHOPPING_GENDER_URL, time_unit, keywords, categorys)
+}
+

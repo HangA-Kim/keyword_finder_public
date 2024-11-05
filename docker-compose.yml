@@ -7,12 +7,12 @@ services:
     env_file:
       - .env
 
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    image: hangakim/keyword_finder:nginx
-    depends_on:
-      - app
-    ports:
-      - "80:80"
+  # nginx:
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: Dockerfile
+  #   image: hangakim/keyword_finder:nginx
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - "80:80"

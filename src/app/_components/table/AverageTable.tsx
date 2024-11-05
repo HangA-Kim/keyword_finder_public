@@ -1,13 +1,13 @@
 import { Paper, TableBody, TableRow, TableHead, TableCell, Table, Stack, Typography } from '@mui/material'
 import { TableContainer } from '@mui/material'
 import React, { Component } from 'react'
-import type { KeywordAverage } from '~/common/types'
 import { textColor } from '~/styles/colors';
 
 interface AverageTableProps {
   title: string
   headers: string[]
-  averageData: KeywordAverage[]
+  averageData: Object[]
+  isTrend: boolean
 }
 export class AverageTable extends Component<AverageTableProps> {
   render() {
@@ -19,15 +19,15 @@ export class AverageTable extends Component<AverageTableProps> {
         <TableHead>
           <TableRow>
             {
-              this.props.headers.map((header) => (
-                <TableCell>{header}</TableCell>
+              this.props.headers.map((header, index) => (
+                <TableCell key={index}>{header}</TableCell>
               ))
             }
           </TableRow>
         </TableHead>
         <TableBody>
           {this.props.averageData.map((row, index) => (
-            <TableRow
+            <TableRow key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -35,11 +35,15 @@ export class AverageTable extends Component<AverageTableProps> {
               </TableCell>
               {
                 Object.values(row).map((item, index) => (
-                  index !== 0 ? (
+                  this.props.isTrend && index !== 0 ? (
                     <TableCell key={index} component="th" scope="row">
                       {item}
                     </TableCell>
-                  ) : null
+                  ) : (
+                    <TableCell key={index} component="th" scope="row">
+                      {item}
+                    </TableCell>
+                  )
                 ))
               }
             </TableRow>

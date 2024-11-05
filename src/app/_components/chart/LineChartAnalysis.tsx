@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { LineChart } from '@mui/x-charts/LineChart';
-import type { TrendsDatas, AgeDatas } from '~/common/types';
+import type { TrendsDatas, ShoppingDatas } from '~/common/types';
 import { orangeBrown, paperColor } from '~/styles/colors';
 import { BarChart } from '@mui/x-charts/BarChart';
 
@@ -12,7 +12,7 @@ export const LineChartAnalysis = async () => {
     age_analysis_url
   );
   // const data = (await res.json()) as TrendsDatas[];
-  const res_data = (await res.json()) as AgeDatas[];
+  const res_data = (await res.json()) as ShoppingDatas[];
   // console.log('Fetched data:', data);
   console.log('Is array:', Array.isArray(res_data));
   console.log('Array length:', res_data.length);

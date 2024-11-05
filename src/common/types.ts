@@ -44,12 +44,31 @@ export interface TrendsDatas {
   naver_data: KeywordData[];
 }
 
-export interface AnalysisDatas {
+export interface APIAnalysisDatas {
   trendsData: TrendsDatas[];
   averageData: KeywordAverage[];
 }
 
-export interface AgeDatas {
+export interface ShoppingDatas{
   group: string;
   data: KeywordData[];
+}
+
+export interface Shopping {
+  keyword: string;
+  shoppingDatas: ShoppingDatas[]
+}
+
+interface ShoppingAverage{
+  keyword: string;
+  "10": number,
+  "20": number,
+  "30": number,
+  "40": number,
+  "50": number,
+  "60": number,
+}
+export interface APIShoppingDatas{
+  shopping: Shopping[],
+  average: ShoppingAverage[]
 }
