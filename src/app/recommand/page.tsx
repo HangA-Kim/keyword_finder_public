@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import MainRecommand from "./MainRecommand";
 import { getServerAuthSession } from "~/server/auth";
 import FailLogin from "./FailLogin";
-import GoogleRecommand from "./GoogleRecommand"
 
 const KeywordReco = async () => {
   const session = await getServerAuthSession();
