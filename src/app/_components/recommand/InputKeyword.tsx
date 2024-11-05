@@ -1,7 +1,7 @@
 import {
   OutlinedInput,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 import { bgColor } from '~/styles/colors';
 

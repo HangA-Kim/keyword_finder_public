@@ -1,4 +1,4 @@
-import { ShoppingDatas, APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
+import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
 
 export const BASE_URL = 'http://127.0.0.1:8000';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;

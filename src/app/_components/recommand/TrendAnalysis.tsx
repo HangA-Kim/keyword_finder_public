@@ -2,7 +2,7 @@ import { Stack } from '@mui/material'
 import React, { Component } from 'react'
 import AverageTable from '../table/AverageTable'
 import {TrendTabs} from '../tab/BasicTabs'
-import { APIAnalysisDatas } from '~/common/types'
+import type { APIAnalysisDatas } from '~/common/types'
 
 interface TrendAnalysisProps {
   analysisData: APIAnalysisDatas

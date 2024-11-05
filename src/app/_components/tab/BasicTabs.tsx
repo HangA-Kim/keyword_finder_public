@@ -2,7 +2,7 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Shopping, TrendsDatas } from '~/common/types';
+import type { Shopping, TrendsDatas } from '~/common/types';
 import CustomBarChart from '../chart/CustomBarChart';
 import CustomLineChart from '../chart/CustomLineChart';
 
@@ -59,9 +59,17 @@ export function TrendTabs(props:TrendTabsProps) {
       </Box>
       {
         props.trendData.map((item, index) => (
-          <CustomTabPanel key={index} value={value} index={index} children={<CustomBarChart key={index} trend_data={item} />}/>
+          <CustomTabPanel key={index} value={value} index={index}>
+            <CustomBarChart key={index} trend_data={item} />
+          </CustomTabPanel>
         ))
       }
+
+      {/* {
+        props.trendData.map((item, index) => (
+          <CustomTabPanel key={index} value={value} index={index} children={<CustomBarChart key={index} trend_data={item} />}/>
+        ))
+      } */}
     </Box>
   );
 }
@@ -90,7 +98,10 @@ export function ShoppingTabs(props:ShoppingTabsProps) {
       </Box>
       {
         props.shoppings.map((item, index) => (
-          <CustomTabPanel key={index} value={value} index={index} children={<CustomLineChart key={index} shoppingDatas={item.shoppingDatas} />}/>
+          <CustomTabPanel key={index} value={value} index={index}>
+            <CustomLineChart key={index} shoppingDatas={item.shoppingDatas} />
+          </CustomTabPanel>
+          // <CustomTabPanel key={index} value={value} index={index} children={<CustomLineChart key={index} shoppingDatas={item.shoppingDatas} />}/>
         ))
       }
     </Box>

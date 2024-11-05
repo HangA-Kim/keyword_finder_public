@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import React from "react";
-import { whiteColor } from "~/styles/colors";
 
 interface CustomColorBtnProps {
   link: string;

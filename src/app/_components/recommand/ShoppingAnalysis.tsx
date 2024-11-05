@@ -2,7 +2,7 @@ import { Stack } from '@mui/material'
 import React, { Component } from 'react'
 import AverageTable from '../table/AverageTable'
 import { ShoppingTabs } from '../tab/BasicTabs'
-import { APIShoppingDatas } from '~/common/types'
+import type { APIShoppingDatas } from '~/common/types'
 
 interface ShoppingAnalysisProps {
   title: string,

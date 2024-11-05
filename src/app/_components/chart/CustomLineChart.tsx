@@ -24,7 +24,7 @@ export class CustomLineChart extends Component<CustomLineChartProps> {
       const periodMap = new Map(item.data.map(subItem => [subItem.period, subItem.ratio]));
 
       // xAxis_data를 기준으로 누락된 period에 대해 값을 null로 채웁니다.
-      const filledData = xAxis_data.map(period => periodMap.get(period as string) || null);
+      const filledData = xAxis_data.map(period => periodMap.get(period as string) ?? null);
 
       return {
         data: filledData,

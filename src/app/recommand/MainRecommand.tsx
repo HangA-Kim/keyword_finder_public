@@ -10,7 +10,7 @@ import { useSnackbar } from "~/app/_context/SnackbarContext";
 import SearchChips from "../_components/SearchChips";
 import AddIcon from '@mui/icons-material/Add';
 import ToggleBtn from '../_components/button/ToggleBtn';
-import { APIAnalysisDatas, APIShoppingDatas } from '~/common/types';
+import type { APIAnalysisDatas, APIShoppingDatas } from '~/common/types';
 import TrendAnalysis from '../_components/recommand/TrendAnalysis';
 import ShoppingAnalysis from '../_components/recommand/ShoppingAnalysis';
 
@@ -45,50 +45,64 @@ const CategorySelection: React.FC = () => {
   type LevelType = typeof levels[number];
 
   useEffect(() => {
-    // 첫 번째 단계(대분류)의 카테고리 데이터를 로드
-    getCategory('대분류', '대분류').then((data) => {
-      console.log(data);
-      if (Array.isArray(data)) {
-        setCategoryState((prev) => ({
-          ...prev,
-          options: { ...prev.options, '대분류': data },
-        }));
-      } else {
-        console.error("getCategory returned a non-array value:", data);
+    const fetchCategory = async () => {
+      try {
+        // 첫 번째 단계(대분류)의 카테고리 데이터를 로드
+        const data = await getCategory('대분류', '대분류');
+        console.log(data);
+        if (Array.isArray(data)) {
+          setCategoryState((prev) => ({
+            ...prev,
+            options: { ...prev.options, '대분류': data },
+          }));
+        } else {
+          console.error("getCategory returned a non-array value:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching category data:", error);
       }
-    });
+    };
+  
+    fetchCategory();
   }, []);
 
   useEffect(() => {
-    if (!analysisData) {
-      setIsLoading(false)
-      return;
-    }
-    const categories = Object.values(categoryState.selected).filter((value) => value !== '');
-    const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
-    shoppingAge(timeUnit, keywordListArray, ...categories).then((data) => {
-      console.log('shoppingAge:', data);
-      if (data) {
-        setShoppingAgeData(data);
+
+    const fetchShoppingAge = ()=>{
+      if (!analysisData) {
+        setIsLoading(false)
+        return;
       }
-      setIsLoading(false)
-    });
+      const categories = Object.values(categoryState.selected).filter((value) => value !== '');
+      const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
+      shoppingAge(timeUnit, keywordListArray, ...categories).then((data) => {
+        console.log('shoppingAge:', data);
+        if (data) {
+          setShoppingAgeData(data);
+        }
+        setIsLoading(false)
+      });
+    }
+    fetchShoppingAge();
   }, [timeUnit, analysisData]);
 
   useEffect(() => {
-    if (!shoppingAgeData) {
-      setIsLoading(false)
-      return;
-    }
-    const categories = Object.values(categoryState.selected).filter((value) => value !== '');
-    const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
-    shoppingGender(timeUnit, keywordListArray, ...categories).then((data) => {
-      console.log('shoppingGender:', data);
-      if (data) {
-        setShoppingGenderData(data);
+    const fetchShoppingGender = ()=>{
+      if (!shoppingAgeData) {
+        setIsLoading(false)
+        return;
       }
-      setIsLoading(false)
-    });
+      const categories = Object.values(categoryState.selected).filter((value) => value !== '');
+      const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
+      shoppingGender(timeUnit, keywordListArray, ...categories).then((data) => {
+        console.log('shoppingGender:', data);
+        if (data) {
+          setShoppingGenderData(data);
+        }
+        setIsLoading(false)
+      });
+    }
+    fetchShoppingGender();
   }, [timeUnit, shoppingAgeData]);
 
   const handleTimeUnitChange = (

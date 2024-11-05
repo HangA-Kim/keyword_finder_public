@@ -29,7 +29,7 @@ export class SelectNoBorder extends Component<SelectNoBorderProps> {
           sx={{
             backgroundColor: bgColor, // 배경색 설정
           }}
-          onChange={(e) => this.props.handleChange(this.props.level, e.target.value as string)}
+          onChange={(e) => this.props.handleChange(this.props.level, e.target.value)}
         >
           {
             this.props.categories.map((item, index)=>(

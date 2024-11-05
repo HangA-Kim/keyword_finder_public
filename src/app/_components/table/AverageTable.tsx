@@ -6,7 +6,7 @@ import { textColor } from '~/styles/colors';
 interface AverageTableProps {
   title: string
   headers: string[]
-  averageData: Object[]
+  averageData: object[]
   isTrend: boolean
 }
 export class AverageTable extends Component<AverageTableProps> {

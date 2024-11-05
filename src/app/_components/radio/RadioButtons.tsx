@@ -31,8 +31,8 @@ export class RadioButtons extends Component<RadioButtonsProps> {
             onChange={(e) => this.props.onChange(e.target.value)}
           >
           {
-            this.props.radioArray.map(((item) => (
-              <FormControlLabel value={item.value} control={<Radio />} label={item.label} />
+            this.props.radioArray.map(((item, index) => (
+              <FormControlLabel key={index} value={item.value} control={<Radio />} label={item.label} />
             )))
           }
           </RadioGroup>
