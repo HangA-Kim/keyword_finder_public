@@ -59,7 +59,7 @@ export interface Shopping {
   shoppingDatas: ShoppingDatas[]
 }
 
-interface ShoppingAverage{
+interface ShoppingAverageAge{
   keyword: string;
   "10": number,
   "20": number,
@@ -68,7 +68,13 @@ interface ShoppingAverage{
   "50": number,
   "60": number,
 }
+
+interface ShoppingAverageGender{
+  keyword: string;
+  m: number,
+  f: number,
+}
 export interface APIShoppingDatas{
   shopping: Shopping[],
-  average: ShoppingAverage[]
+  average: ShoppingAverageAge[] | ShoppingAverageGender[]
 }

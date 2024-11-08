@@ -49,7 +49,8 @@ const CategorySelection: React.FC = () => {
       try {
         // 첫 번째 단계(대분류)의 카테고리 데이터를 로드
         const data = await getCategory('대분류', '대분류');
-        console.log(data);
+        if(!data) return
+        console.log('fetchCategory', 'data > ', data)
         if (Array.isArray(data)) {
           setCategoryState((prev) => ({
             ...prev,
@@ -63,46 +64,40 @@ const CategorySelection: React.FC = () => {
       }
     };
   
-    fetchCategory();
+    void fetchCategory();
   }, []);
 
   useEffect(() => {
 
-    const fetchShoppingAge = ()=>{
-      if (!analysisData) {
-        setIsLoading(false)
-        return;
-      }
-      const categories = Object.values(categoryState.selected).filter((value) => value !== '');
-      const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
-      shoppingAge(timeUnit, keywordListArray, ...categories).then((data) => {
-        console.log('shoppingAge:', data);
-        if (data) {
-          setShoppingAgeData(data);
-        }
-        setIsLoading(false)
-      });
+    if (!analysisData) {
+      setIsLoading(false)
+      return;
     }
-    fetchShoppingAge();
+    const categories = Object.values(categoryState.selected).filter((value) => value !== '');
+    const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
+    void shoppingAge(timeUnit, keywordListArray, ...categories).then((data) => {
+      console.log('shoppingAge:', data);
+      if (data) {
+        setShoppingAgeData(data);
+      }
+      setIsLoading(false)
+    });
   }, [timeUnit, analysisData]);
 
   useEffect(() => {
-    const fetchShoppingGender = ()=>{
-      if (!shoppingAgeData) {
-        setIsLoading(false)
-        return;
-      }
-      const categories = Object.values(categoryState.selected).filter((value) => value !== '');
-      const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
-      shoppingGender(timeUnit, keywordListArray, ...categories).then((data) => {
-        console.log('shoppingGender:', data);
-        if (data) {
-          setShoppingGenderData(data);
-        }
-        setIsLoading(false)
-      });
+    if (!shoppingAgeData) {
+      setIsLoading(false)
+      return;
     }
-    fetchShoppingGender();
+    const categories = Object.values(categoryState.selected).filter((value) => value !== '');
+    const keywordListArray = keywordList.map((item) => item.word); // 키워드 배열 생성
+    void shoppingGender(timeUnit, keywordListArray, ...categories).then((data) => {
+      console.log('shoppingGender:', data);
+      if (data) {
+        setShoppingGenderData(data);
+      }
+      setIsLoading(false)
+    });
   }, [timeUnit, shoppingAgeData]);
 
   const handleTimeUnitChange = (
@@ -128,8 +123,8 @@ const CategorySelection: React.FC = () => {
 
       // 선택된 level 이후의 모든 값을 초기화
       levels.slice(levelIndex + 1).forEach((lvl) => {
-        newState.selected[lvl as LevelType] = '';
-        newState.options[lvl as LevelType] = [];
+        newState.selected[lvl] = '';
+        newState.options[lvl] = [];
       });
 
       return newState;
@@ -139,10 +134,10 @@ const CategorySelection: React.FC = () => {
     const nextLevelIndex = levels.indexOf(level as LevelType) + 1;
     console.log('nextLevelIndex', nextLevelIndex);
     if (nextLevelIndex <= levels.length - 1) {
-      const nextLevel = levels[nextLevelIndex] as typeof levels[number];
+      const nextLevel = levels[nextLevelIndex]!;
       const nextCategoryType = nextLevelIndex === 1 ? '중분류' : nextLevelIndex === 2 ? '소분류' : '세분류';
       console.log(nextLevel, nextCategoryType);
-      getCategory(value, nextCategoryType).then((data) => {
+      void getCategory(value, nextCategoryType).then((data) => {
         console.log(data);
         if (Array.isArray(data)) {
           setCategoryState((prev) => ({
@@ -170,7 +165,7 @@ const CategorySelection: React.FC = () => {
       return;
     }
 
-    recommandKeyword(keyword, ...categories).then((data) => {
+    void recommandKeyword(keyword, ...categories).then((data) => {
       console.log(data);
       if(data) {
         const test = data.keywords.map((word) => ({ word }));
@@ -200,7 +195,7 @@ const CategorySelection: React.FC = () => {
   };
 
   const getAnalysisData = (newTimeUnit: string) => {
-    analysisKeywords(newTimeUnit, ...keywordList.map((item) => item.word)).then((data) => {
+    void analysisKeywords(newTimeUnit, ...keywordList.map((item) => item.word)).then((data) => {
       console.log(data);
       if (data) {
         setAnalysisData(data);
@@ -223,15 +218,15 @@ const CategorySelection: React.FC = () => {
           <Stack direction="row" spacing={2}>
             {levels.map((level, index) => {
               const isLastLevel = level === '세분류'; // 마지막 단계인지 확인
-              const hasPreviousSelection = index === 0 || categoryState.selected[levels[index - 1] as LevelType];
-              const hasOptions = categoryState.options[level as keyof typeof categoryState.options].length > 0;
+              const hasPreviousSelection = index === 0 || categoryState.selected[levels[index - 1]!];
+              const hasOptions = categoryState.options[level].length > 0;
 
               return hasPreviousSelection ? (
                 hasOptions ? (
                   <SelectNoBorder
                     key={level}
-                    selectedCategories={categoryState.selected[level as keyof typeof categoryState.selected]}
-                    categories={categoryState.options[level as keyof typeof categoryState.options]}
+                    selectedCategories={categoryState.selected[level]}
+                    categories={categoryState.options[level]}
                     handleChange={handleCategoryChange}
                     level={level}
                   />

@@ -14,7 +14,7 @@ export const getCategory = async (category_name: string, sub_category_name: stri
     const encodedSubCategoryName = sub_category_name.replace(/\//g, '|');
     const url = `${GET_CATEGORY_URL}/${encodedCategoryName}/${encodedSubCategoryName}`;
     const res = await fetch(url);
-    const data = await res.json();
+    const data = await res.json() as string[];
     return data;
   } catch (error) {
     console.error('Error fetching category:', error);
@@ -69,11 +69,11 @@ const getShoppingData = async(shopping_url:string, time_unit:string, keywords:st
     return null;
   }
 }
-export const shoppingAge = async(time_unit:string, keywords:string[], ...categorys) => {
+export const shoppingAge = async(time_unit:string, keywords:string[], ...categorys: string[]) => {
   return getShoppingData(GET_SHOPPING_AGE_URL, time_unit, keywords, categorys)
 }
 
-export const shoppingGender = async(time_unit:string, keywords:string[], ...categorys) => {
+export const shoppingGender = async(time_unit:string, keywords:string[], ...categorys: string[]) => {
   return getShoppingData(GET_SHOPPING_GENDER_URL, time_unit, keywords, categorys)
 }
 
