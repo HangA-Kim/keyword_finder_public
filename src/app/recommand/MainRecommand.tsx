@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, Box, Button, Typography, Divider, IconButton, InputAdornment, OutlinedInput, InputLabel, FormControl, CircularProgress } from '@mui/material';
 import { paperColor, textColor } from '~/styles/colors';
-import { getCategory, recommandKeyword, analysisKeywords, shoppingAge, shoppingGender } from '~/app/_common/apis';
+import { getCategory, recommandKeyword, analysisKeywords, shoppingAge, shoppingGender } from '~/common/apis';
 import SelectNoBorder from '../_components/select/SelectNoBorder';
 import InputKeyword from "../_components/recommand/InputKeyword";
 import { useSnackbar } from "~/app/_context/SnackbarContext";
@@ -172,9 +172,11 @@ const CategorySelection: React.FC = () => {
 
     recommandKeyword(keyword, ...categories).then((data) => {
       console.log(data);
-      const test = data.keyword.map((word) => ({ word }));
-      console.log(test);
-      setKeywordList(test);
+      if(data) {
+        const test = data.keywords.map((word) => ({ word }));
+        console.log(test);
+        setKeywordList(test);
+      }
     });
   };
 

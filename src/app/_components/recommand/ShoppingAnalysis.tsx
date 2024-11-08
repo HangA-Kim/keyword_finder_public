@@ -15,14 +15,14 @@ export class ShoppingAnalysis extends Component<ShoppingAnalysisProps> {
     return (
       <Stack direction={"row"} spacing={5} alignItems={"center"} justifyContent={"center"}>
         {
-          (this.props.shoppingData && this.props.shoppingData.average && this.props.shoppingData.average.length > 0) &&
+          (this.props.shoppingData?.average && this.props.shoppingData.average.length > 0) &&
             <AverageTable title={this.props.title} headers={this.props.headers} 
             isTrend={false}
             averageData={this.props.shoppingData.average} />
         }
         <Stack>
           {
-            (this.props.shoppingData && this.props.shoppingData.shopping && this.props.shoppingData.shopping.length > 0) &&
+            (this.props.shoppingData?.shopping && this.props.shoppingData.shopping.length > 0) &&
             (
               <ShoppingTabs 
               shoppings={this.props.shoppingData.shopping}/>

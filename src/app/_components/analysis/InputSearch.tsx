@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Component, useEffect } from "react";
+import { Component, useEffect, useState } from "react";
 import {
   Paper,
   InputBase,
@@ -22,15 +22,15 @@ interface InputSearchProps {
 export class InputSearch extends Component<InputSearchProps> {
   render() {
       
-    const [inputText, setInputText] = React.useState(this.props.keyword);
-    const [detailSearchCheck, setDetaileSearchCheck] = React.useState(false);
+    const [inputText, setInputText] = useState(this.props.keyword);
+    const [detailSearchCheck, setDetaileSearchCheck] = useState(false);
 
-    const [startDate, setStartDate] = React.useState<Dayjs>(
+    const [startDate, setStartDate] = useState<Dayjs>(
       dayjs().subtract(1, "month")
     );
-    const [timeUnit, setTimeUnit] = React.useState("date");
-    const [device, setDevice] = React.useState("pc");
-    const [gender, setGender] = React.useState("f");
+    const [timeUnit, setTimeUnit] = useState("date");
+    const [device, setDevice] = useState("pc");
+    const [gender, setGender] = useState("f");
     // const [ages, setAges] = React.useState("5");
 
 

@@ -13,14 +13,14 @@ export class TrendAnalysis extends Component<TrendAnalysisProps> {
     return (
       <Stack direction={"row"} spacing={5} alignItems={"center"} justifyContent={"center"}>
         {
-          (this.props.analysisData && this.props.analysisData.averageData && this.props.analysisData.averageData.length > 0) &&
+          (this.props.analysisData?.averageData && this.props.analysisData.averageData.length > 0) &&
             <AverageTable title='키워드 검색량 분석' headers={['순위', '글로벌', '한국']} 
             isTrend={true} 
             averageData={this.props.analysisData.averageData} />
         }
         <Stack>
           {
-            (this.props.analysisData && this.props.analysisData.trendsData && this.props.analysisData.trendsData.length > 0) &&
+            (this.props.analysisData?.trendsData && this.props.analysisData.trendsData.length > 0) &&
             (
               <TrendTabs trendData={this.props.analysisData.trendsData}/>
             )

@@ -22,12 +22,15 @@ export const getCategory = async (category_name: string, sub_category_name: stri
   }
 };
 
+type keywords = {
+  'keywords': string[]
+}
 export const recommandKeyword = async(keyword:string, ...category) => {
   try{
     const categoryString = category.join('>'); // 카테고리들을 '>'로 연결
     const url = `${GET_RECOMMAND_KEYWORD_URL}?category=${encodeURIComponent(categoryString)}&subject=${encodeURIComponent(keyword)}`;
     const res = await fetch(url);
-    const data = await res.json();
+    const data = await res.json() as keywords;
     return data;
   } catch (error) {
     console.error('Error fetching recommandKeyword:', error);

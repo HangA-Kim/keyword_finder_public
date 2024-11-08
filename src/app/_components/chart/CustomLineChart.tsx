@@ -1,7 +1,7 @@
 import { LineChart } from '@mui/x-charts/LineChart'
 import React, { Component } from 'react'
 import { orangeBrown, textColor, darkGreen, darkBrown, lightGreen } from '~/styles/colors';
-import { ShoppingDatas } from '~/common/types';
+import type { ShoppingDatas } from '~/common/types';
 
 interface CustomLineChartProps {
   shoppingDatas: ShoppingDatas[]
