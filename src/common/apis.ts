@@ -1,6 +1,10 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
+import { env } from "~/env";
 
-export const BASE_URL = 'http://localhost:8822/api';
+export let BASE_URL;
+if(env.NODE_ENV === "development")
+  BASE_URL  = 'http://localhost:8822/api';
+else BASE_URL = 'http://127.0.0.1:8080';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;
 export const GET_ANALYSIS_KEYWORD_URL = `${BASE_URL}/analysis/keywords`;
 export const GET_SHOPPING_AGE_URL = `${BASE_URL}/analysis/shopping/age`;
