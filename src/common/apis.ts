@@ -1,6 +1,6 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
 
-export const BASE_URL = 'http://127.0.0.1:8000';
+export const BASE_URL = 'http://api:4000';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;
 export const GET_ANALYSIS_KEYWORD_URL = `${BASE_URL}/analysis/keywords`;
 export const GET_SHOPPING_AGE_URL = `${BASE_URL}/analysis/shopping/age`;
