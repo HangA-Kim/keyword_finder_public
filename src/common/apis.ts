@@ -1,5 +1,5 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
-import { env } from "~/env";
+// import { env } from "~/env";
 
 // export let BASE_URL;
 // if(env.NODE_ENV === "development")
