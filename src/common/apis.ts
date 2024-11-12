@@ -1,7 +1,7 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
 
 let BASE_URL;
-if (process.env.NEXT_PUBLIC_NODE_ENV !== "production")
+if (process.env.NODE_ENV !== "production")
   BASE_URL  = 'http://127.0.0.1:8080';
 else BASE_URL = 'http://localhost:8822/fastapi';
 

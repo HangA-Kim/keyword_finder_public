@@ -7,6 +7,6 @@ declare namespace NodeJS {
     NEXTAUTH_SECRET: string;
     NAVER_ID: string;
     NAVER_SECRET: string;
-    NEXT_PUBLIC_NODE_ENV: string;
+    NODE_ENV: string;
   }
 }
