@@ -1,11 +1,11 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
-// import { env } from "~/env";
+import { env } from "~/env";
 
-// export let BASE_URL;
-// if(env.NODE_ENV === "development")
-//   BASE_URL  = 'http://127.0.0.1:8080';
-// else BASE_URL = 'http://localhost:8822/fastapi';
-const BASE_URL = 'http://localhost:8822/fastapi';
+let BASE_URL;
+if(env.NEXT_PUBLIC_NODE_ENV === "development")
+  BASE_URL  = 'http://127.0.0.1:8080';
+else BASE_URL = 'http://localhost:8822/fastapi';
+// const BASE_URL = 'http://localhost:8822/fastapi';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;
 export const GET_ANALYSIS_KEYWORD_URL = `${BASE_URL}/analysis/keywords`;
 export const GET_SHOPPING_AGE_URL = `${BASE_URL}/analysis/shopping/age`;
