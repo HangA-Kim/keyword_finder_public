@@ -1,10 +1,10 @@
 import type { APIAnalysisDatas, APIShoppingDatas } from "~/common/types";
-import { env } from "~/env";
 
 let BASE_URL;
-if(env.NEXT_PUBLIC_NODE_ENV === "development")
+if (process.env.NEXT_PUBLIC_NODE_ENV !== "production")
   BASE_URL  = 'http://127.0.0.1:8080';
 else BASE_URL = 'http://localhost:8822/fastapi';
+
 // const BASE_URL = 'http://localhost:8822/fastapi';
 export const GET_CATEGORY_URL = `${BASE_URL}/categories`;
 export const GET_ANALYSIS_KEYWORD_URL = `${BASE_URL}/analysis/keywords`;
